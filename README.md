@@ -1,5 +1,8 @@
 # AgentOps
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=coverage)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps)
+
 AgentOps is an AI-powered failure analysis agent for CI/CD pipelines. It provides a framework for parsing, filtering, and analyzing logs, with extensible parser registration and error extraction capabilities.
 
 ## Features
