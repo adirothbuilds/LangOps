@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          path: .
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -37,6 +39,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          path: .
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -68,6 +72,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          path: .
 
       - name: Download coverage from test job
         uses: actions/download-artifact@v4
@@ -87,11 +93,6 @@ jobs:
       - name: Install dependencies
         run: |
           make install
-
-      - name: Attach coverage to SonarCloud
-        run: |
-          echo "sonar.python.coverage.reportPaths=coverage.xml" >> sonar-project.properties
-        shell: bash
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2
