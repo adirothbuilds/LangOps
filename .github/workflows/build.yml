@@ -13,6 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           path: .
 
       - name: Set up Python
@@ -40,6 +41,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           path: .
 
       - name: Set up Python
@@ -77,6 +79,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           path: .
 
       - name: Download coverage from test job
@@ -106,6 +109,7 @@ jobs:
             -Dsonar.organization=adirothbuilds
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.sources=.
+            -Dsonar.exclusions=**/tests/**
             -Dsonar.python.version=3.11
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
