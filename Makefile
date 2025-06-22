@@ -22,7 +22,10 @@ test:
 	poetry run pytest
 
 coverage:
-	poetry run pytest --cov=agentops --cov-report=term-missing --cov-report=xml --cov-report=html
+	poetry run coverage run --source=agentops -m pytest
+	poetry run coverage report --show-missing
+	poetry run coverage xml -o coverage.xml
+	poetry run coverage html
 
 install:
 	poetry install
