@@ -63,7 +63,7 @@ jobs:
       - name: Patch coverage source path (hotfix)
         run: |
           sed -i 's|<source>.*</source>|<source>agentops</source>|' coverage.xml
-          
+
       - name: Save coverage for Sonar job
         uses: actions/upload-artifact@v4
         with:
@@ -105,7 +105,7 @@ jobs:
             -Dsonar.projectKey=adirothbuilds_AgentOps
             -Dsonar.organization=adirothbuilds
             -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.sources=agentops
+            -Dsonar.sources=.
             -Dsonar.python.version=3.11
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

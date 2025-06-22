@@ -22,9 +22,9 @@ test:
 	poetry run pytest
 
 coverage:
-	poetry run coverage run --source=agentops -m pytest
+	poetry run coverage run -m pytest
 	poetry run coverage report --show-missing
-	poetry run coverage xml -o coverage.xml
+	poetry run coverage xml
 	poetry run coverage html
 
 install:

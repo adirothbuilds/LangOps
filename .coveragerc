@@ -1,0 +1,8 @@
+[run]
+source = agentops
+
+[report]
+show_missing = True
+
+[xml]
+output = coverage.xml
