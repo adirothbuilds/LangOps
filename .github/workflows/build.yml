@@ -60,6 +60,10 @@ jobs:
         run: |
           make coverage
 
+      - name: Patch coverage source path (hotfix)
+        run: |
+          sed -i 's|<source>.*</source>|<source>agentops</source>|' coverage.xml
+          
       - name: Save coverage for Sonar job
         uses: actions/upload-artifact@v4
         with:
