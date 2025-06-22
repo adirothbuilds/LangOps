@@ -1,4 +1,5 @@
-name: CI
+# This workflow runs static analysis and tests on the codebase.
+name: Static Analysis and Testing
 
 on:
   push:
