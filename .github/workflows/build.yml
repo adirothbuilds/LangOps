@@ -100,5 +100,6 @@ jobs:
             -Dsonar.organization=adirothbuilds
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.sources=agentops
+            -Dsonar.python.version=3.11
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
