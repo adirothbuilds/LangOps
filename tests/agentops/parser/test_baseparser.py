@@ -1,3 +1,4 @@
+from pathlib import Path
 import pytest
 from agentops.parser.base import BaseParser
 import json
@@ -64,36 +65,31 @@ def test_baseparser_to_json_fail():
 
 
 def test_baseparser_from_file():
-    parser = DummyParser()
+    parser = DummyParser() 
     with tempfile.NamedTemporaryFile(delete=False, mode="w", encoding="utf-8") as tmp:
         tmp.write("hello")
         tmp_path = tmp.name
     try:
-        result = DummyParser.from_file(tmp_path)
+        result = parser.from_file(tmp_path)
         assert result == "HELLO"
     finally:
         os.remove(tmp_path)
 
 
 def test_baseparser_from_file_not_implemented():
-    class NotImplementedParser(BaseParser):
-        def parse(self, data):
-            return data
+    with pytest.raises(NotImplementedError):
+        BaseParser.from_file("fake.txt")
 
     with pytest.raises(NotImplementedError):
         BaseParser.from_file("fake.txt")
 
 
 def test_baseparser_to_json_not_implemented():
-    class NotImplementedParser(BaseParser):
-        def parse(self, data):
-            return data
-
     with pytest.raises(NotImplementedError):
         BaseParser.to_json({})
 
 
-def test_handle_log_file(tmp_path):
+def test_handle_log_file(tmp_path: Path):
     file_path = tmp_path / "log.txt"
     file_path.write_text("log content")
     assert DummyParser.handle_log_file(str(file_path)) == "log content"
