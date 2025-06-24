@@ -1,6 +1,7 @@
 import unittest
 from agentops.llm.registry import LLMRegistry
 
+
 class TestLLMRegistry(unittest.TestCase):
     def test_register_and_get_llm(self):
         @LLMRegistry.register("TestLLM")
@@ -23,6 +24,7 @@ class TestLLMRegistry(unittest.TestCase):
         llm_names = LLMRegistry.list_llms()
         self.assertIn("TestLLM1", llm_names)
         self.assertIn("TestLLM2", llm_names)
+
 
 if __name__ == "__main__":
     unittest.main()

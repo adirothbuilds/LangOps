@@ -7,7 +7,7 @@ from openai.types.chat import (
     ChatCompletionMessageParam,
     ChatCompletionUserMessageParam,
 )
-from typing import Optional, List, Union, Any, Dict, TypeVar, cast
+from typing import Optional, List, Any, Dict, TypeVar, cast
 
 T = TypeVar("T")
 
@@ -58,16 +58,16 @@ class OpenAILLM(BaseLLM):
         return any(m in model for m in self.CHAT_MODELS)
 
     def _prepare_messages(
-        self, prompt: Union[str, List[ChatCompletionMessageParam]]
-    ) -> Union[List[ChatCompletionMessageParam], str]:
+        self, prompt: str | List[ChatCompletionMessageParam]
+    ) -> List[ChatCompletionMessageParam] | str:
         """
         Prepares messages for API calls based on the prompt type and model.
 
         Args:
-            prompt (Union[str, List[ChatCompletionMessageParam]): The input prompt.
+            prompt (str | List[ChatCompletionMessageParam]): The input prompt.
 
         Returns:
-            Union[List[ChatCompletionMessageParam], str]: The prepared messages or prompt.
+            List[ChatCompletionMessageParam] | str: The prepared messages or prompt.
         """
         if self._is_chat_model():
             if isinstance(prompt, str):
@@ -77,7 +77,11 @@ class OpenAILLM(BaseLLM):
             if isinstance(prompt, list):
                 return "\n".join(
                     [
-                        str(msg["content"]) if isinstance(msg, dict) and msg.get("content") else ""
+                        (
+                            str(msg["content"])
+                            if isinstance(msg, dict) and msg.get("content")
+                            else ""
+                        )
                         for msg in prompt
                     ]
                 )
@@ -134,7 +138,7 @@ class OpenAILLM(BaseLLM):
         }
 
     def complete(
-        self, prompt: Union[str, List[ChatCompletionMessageParam]], **kwargs
+        self, prompt: str | List[ChatCompletionMessageParam], **kwargs
     ) -> LLMResponse:
         """
         Synchronously generates a completion using OpenAI's API.
@@ -143,7 +147,7 @@ class OpenAILLM(BaseLLM):
         and prompt format.
 
         Args:
-            prompt (Union[str, List[ChatCompletionMessageParam]): The input prompt.
+            prompt (str | List[ChatCompletionMessageParam]): The input prompt.
             **kwargs: Additional arguments for the API call.
 
         Returns:
@@ -168,7 +172,7 @@ class OpenAILLM(BaseLLM):
         return LLMResponse(text=str(text or ""), raw=response, metadata=metadata)
 
     async def acomplete(
-        self, prompt: Union[str, List[ChatCompletionMessageParam]], **kwargs
+        self, prompt: str | List[ChatCompletionMessageParam], **kwargs
     ) -> LLMResponse:
         """
         Asynchronously generates a completion using OpenAI's API.
@@ -177,7 +181,7 @@ class OpenAILLM(BaseLLM):
         and prompt format.
 
         Args:
-            prompt (Union[str, List[ChatCompletionMessageParam]): The input prompt.
+            prompt (str | List[ChatCompletionMessageParam]): The input prompt.
             **kwargs: Additional arguments for the API call.
 
         Returns:

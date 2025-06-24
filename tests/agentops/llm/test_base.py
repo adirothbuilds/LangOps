@@ -1,6 +1,7 @@
 import unittest
 from agentops.llm.base import BaseLLM
 
+
 class TestBaseLLM(unittest.TestCase):
     def test_abstract_methods(self):
         with self.assertRaises(TypeError):
@@ -16,6 +17,7 @@ class TestBaseLLM(unittest.TestCase):
         base_prompt = "Hello, World!"
         formatted_prompt = BaseLLM.format_prompt(base_prompt, None)
         self.assertEqual(formatted_prompt, "Hello, World!")
+
 
 if __name__ == "__main__":
     unittest.main()
