@@ -10,7 +10,7 @@ class BaseParser(ABC):
     """
 
     @abstractmethod
-    def parse(self, data): # pragma: no cover
+    def parse(self, data):  # pragma: no cover
         """
         Parse the input data and return the result.
 

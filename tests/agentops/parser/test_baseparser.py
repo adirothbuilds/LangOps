@@ -65,7 +65,7 @@ def test_baseparser_to_json_fail():
 
 
 def test_baseparser_from_file():
-    parser = DummyParser() 
+    parser = DummyParser()
     with tempfile.NamedTemporaryFile(delete=False, mode="w", encoding="utf-8") as tmp:
         tmp.write("hello")
         tmp_path = tmp.name
@@ -98,15 +98,21 @@ def test_handle_log_file(tmp_path: Path):
 def test_filter_log_lines_keyword_level_pattern():
     log = "INFO: all good\nERROR: something failed\nDEBUG: details here"
     # keyword
-    assert DummyParser.filter_log_lines(log, keyword="ERROR") == ["ERROR: something failed"]
+    assert DummyParser.filter_log_lines(log, keyword="ERROR") == [
+        "ERROR: something failed"
+    ]
     # level
     assert DummyParser.filter_log_lines(log, level="DEBUG") == ["DEBUG: details here"]
     # pattern
     assert DummyParser.filter_log_lines(log, pattern=r"INFO") == ["INFO: all good"]
     # pattern + keyword
-    assert DummyParser.filter_log_lines(log, pattern=r"ERROR", keyword="failed") == ["ERROR: something failed"]
+    assert DummyParser.filter_log_lines(log, pattern=r"ERROR", keyword="failed") == [
+        "ERROR: something failed"
+    ]
     # pattern + level (should match both)
-    assert DummyParser.filter_log_lines(log, pattern=r"DEBUG", level="DEBUG") == ["DEBUG: details here"]
+    assert DummyParser.filter_log_lines(log, pattern=r"DEBUG", level="DEBUG") == [
+        "DEBUG: details here"
+    ]
     # nothing matches
     assert DummyParser.filter_log_lines(log, keyword="notfound") == []
 
@@ -115,5 +121,6 @@ def test_to_dict_with_to_dict_method():
     class HasToDict:
         def to_dict(self):
             return {"foo": "bar"}
+
     obj = HasToDict()
     assert DummyParser.to_dict(obj) == {"foo": "bar"}

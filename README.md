@@ -1,19 +1,23 @@
 # AgentOps
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=coverage)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=coverage)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Python](https://img.shields.io/badge/Python-3.13-blue)](https://www.python.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![SDK](https://img.shields.io/badge/SDK-AgentOps-green)](https://github.com/adirothbuilds/AgentOps)
 
 AgentOps is an AI-powered failure analysis agent for CI/CD pipelines. It provides a framework for parsing, filtering, and analyzing logs, with extensible parser registration and error extraction capabilities.
 
-## Features
+---
 
-- Abstract base parser class for log and data parsing
-- Error log extraction and filtering
-- Parser registry for easy extension
-- Utilities for file handling and log filtering
-- 100% test coverage with pytest
+## 🚀 Features
 
-## Quick Start
+- **LLM Integration:** Built-in support for OpenAI's GPT models with synchronous and asynchronous completions.
+- **Abstract Base Classes:** Consistent design for log parsing and language model integration.
+- **Error Extraction:** Advanced utilities for filtering and extracting error logs.
+- **Parser Registry:** Decorator-based system for managing parsers.
+- **File Utilities:** Tools for handling and filtering log files.
+- **100% Test Coverage:** Comprehensive unit tests for all components.
+
+---
+
+## 🛠️ Quick Start
 
 1. **Install dependencies:**
 
@@ -33,12 +37,75 @@ AgentOps is an AI-powered failure analysis agent for CI/CD pipelines. It provide
    make coverage
    ```
 
-## Project Structure
+---
+
+## 📂 Project Structure
 
 - `agentops/` — Core library modules
-- `tests/` — Unit tests
-- `docs/` — Documentation
+  - `llm/` — Language model integrations
+  - `parser/` — Log parsing and error extraction
+  - `output/` — Utilities for handling outputs
+- `tests/` — Unit tests for all modules
+- `docs/` — Documentation for the project
 
-## License
+---
 
-MIT
+## 📖 Documentation
+
+Detailed documentation for each module is available in the `docs/` directory:
+
+- [LLM Module](docs/agentops/llm/README.md): Language model integrations.
+- [Parser Module](docs/agentops/parser/README.md): Log parsing and error extraction.
+
+---
+
+## 🌟 Contributing
+
+We welcome contributions to AgentOps! Here's how you can get started:
+
+1. **Fork the repository** and clone it locally.
+2. **Create a new branch** for your feature or bug fix:
+
+   ```sh
+   git checkout -b feature/my-new-feature
+   ```
+
+3. **Make your changes** and ensure all tests pass:
+
+   ```sh
+   make test
+   ```
+
+4. **Submit a pull request** with a clear description of your changes.
+
+### Contributor Guidelines
+
+- Follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+- Write clear commit messages and document your code.
+- Ensure your changes are covered by tests.
+
+---
+
+## 🔮 Future Features
+
+AgentOps is designed to expand its capabilities further. Planned features include:
+
+- **AgentOps.Agent:**
+  - Intelligent agents for automated log analysis and decision-making.
+  - Integration with CI/CD pipelines for proactive error detection.
+
+- **AgentOps.Tool:**
+  - A suite of tools for log visualization and debugging.
+  - Enhanced filtering and search capabilities for large datasets.
+
+- **AgentOps.Alert:**
+  - Real-time alerting system for critical errors.
+  - Configurable thresholds and notification channels.
+
+These features aim to make AgentOps a comprehensive solution for failure analysis and log management.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

@@ -19,10 +19,10 @@ lint:
 	poetry run mypy agentops
 
 test:
-	poetry run pytest
+	poetry run pytest --ignore=demo
 
 coverage:
-	poetry run coverage run -m pytest
+	poetry run coverage run -m pytest --ignore=demo
 	poetry run coverage report --show-missing
 	poetry run coverage xml
 	poetry run coverage html

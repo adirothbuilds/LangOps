@@ -9,7 +9,9 @@ LOG_CONTENT = """
 2025-06-21 10:03:00 WARNING Low memory
 """
 
-EMPTY_LOG = """2025-06-21 10:00:00 INFO All good\n2025-06-21 10:03:00 WARNING Low memory\n"""
+EMPTY_LOG = (
+    """2025-06-21 10:00:00 INFO All good\n2025-06-21 10:03:00 WARNING Low memory\n"""
+)
 
 MIXED_CASE_LOG = """
 2025-06-21 10:01:00 Error Something bad
