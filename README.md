@@ -2,7 +2,9 @@
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=coverage)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Python](https://img.shields.io/badge/Python-3.13-blue)](https://www.python.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![SDK](https://img.shields.io/badge/SDK-AgentOps-green)](https://github.com/adirothbuilds/AgentOps)
 
-AgentOps is an AI-powered failure analysis agent for CI/CD pipelines. It provides a framework for parsing, filtering, and analyzing logs, with extensible parser registration and error extraction capabilities.
+AgentOps is a modular SDK for building AI-powered DevOps tools.
+It provides a flexible framework for parsing logs, interacting with LLMs, and analyzing failure patterns across CI/CD pipelines.
+Designed with extensibility in mind, it supports plug-and-play parsers, model-agnostic LLM clients, and clean abstractions for building intelligent automation agents.
 
 ---
 
