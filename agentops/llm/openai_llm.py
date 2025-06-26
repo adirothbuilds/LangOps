@@ -7,9 +7,7 @@ from openai.types.chat import (
     ChatCompletionMessageParam,
     ChatCompletionUserMessageParam,
 )
-from typing import Optional, List, Any, Dict, TypeVar, cast
-
-T = TypeVar("T")
+from typing import Optional, List, Any, Dict, cast
 
 
 @LLMRegistry.register("OpenAILLM")

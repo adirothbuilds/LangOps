@@ -1,0 +1,38 @@
+from .base import BasePrompt
+from .constants import PromptRole
+
+
+class JenkinsErrorPrompt(BasePrompt):
+    """
+    Subclass of BasePrompt to handle error logs from Jenkins builds.
+    """
+
+    def __init__(self, build_id: str, timestamp: str, **kwargs):
+        """
+        Initialize the JenkinsErrorPrompt instance with a system prompt.
+
+        Args:
+            build_id (str): The ID of the Jenkins build.
+            timestamp (str): The timestamp of the error occurrence.
+            **kwargs: Additional arguments for the BasePrompt.
+        """
+        super().__init__(**kwargs)
+        self.add_prompt(
+            role=PromptRole.SYSTEM,
+            template="Analyzing Jenkins Build Error Logs\nBuild ID: {build_id}\nTimestamp: {timestamp}",
+            variables={"build_id": build_id, "timestamp": timestamp},
+        )
+
+    def add_user_prompt(self, error_logs: list):
+        """
+        Add a user prompt with error logs.
+
+        Args:
+            error_logs (list): List of error log messages.
+        """
+        for log in error_logs:
+            self.add_prompt(
+                role=PromptRole.USER,
+                template="Error Log: {log}",
+                variables={"log": log},
+            )

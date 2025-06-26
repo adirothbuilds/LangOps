@@ -1,6 +1,6 @@
 import os
 import asyncio  # noqa: F401 # Import asyncio for async example
-from agentops.llm.openai_llm import OpenAILLM
+from agentops import OpenAILLM
 
 TEXT_LABEL = "Text:"
 METADATA_LABEL = "Metadata:"

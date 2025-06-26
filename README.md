@@ -46,7 +46,8 @@ Designed with extensibility in mind, it supports plug-and-play parsers, model-ag
 - `agentops/` — Core library modules
   - `llm/` — Language model integrations
   - `parser/` — Log parsing and error extraction
-  - `output/` — Utilities for handling outputs
+  - `alert/` — Alerting mechanisms
+  - `prompt/` — Flexible prompt handling for LLMs
 - `tests/` — Unit tests for all modules
 - `docs/` — Documentation for the project
 
@@ -58,6 +59,8 @@ Detailed documentation for each module is available in the `docs/` directory:
 
 - [LLM Module](docs/agentops/llm/README.md): Language model integrations.
 - [Parser Module](docs/agentops/parser/README.md): Log parsing and error extraction.
+- [Alert Module](docs/agentops/alert/README.md): Alerting mechanisms.
+- [Prompt Module](docs/agentops/prompt/README.md): Flexible prompt handling for LLMs.
 
 ---
 
