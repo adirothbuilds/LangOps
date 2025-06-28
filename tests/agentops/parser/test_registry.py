@@ -1,5 +1,5 @@
-from agentops.parser.registry import ParserRegistry
-from agentops.parser.error_parser import ErrorParser
+from agentops import ParserRegistry
+from agentops.parser import ErrorParser
 
 
 def test_registry_register_and_get():

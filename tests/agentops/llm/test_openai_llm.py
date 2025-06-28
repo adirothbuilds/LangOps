@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import MagicMock, AsyncMock
-from agentops.llm.openai_llm import OpenAILLM
+from agentops.llm import OpenAILLM
 
 
 @pytest.fixture

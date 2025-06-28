@@ -1,8 +1,7 @@
 from abc import ABC
 from pydantic import BaseModel, Field
 from typing import Dict, Any, List
-from .constants import PromptRole
-from .type import RenderedPrompt
+from agentops.core.types import RenderedPrompt, PromptRole
 
 
 class BasePrompt(BaseModel, ABC):

@@ -1,6 +1,6 @@
 import os
-import asyncio  # noqa: F401 # Import asyncio for async example
-from agentops import OpenAILLM
+import asyncio
+from agentops.llm import OpenAILLM
 
 TEXT_LABEL = "Text:"
 METADATA_LABEL = "Metadata:"
@@ -33,5 +33,4 @@ async def async_example():
     print(TEXT_LABEL, async_response.text)
     print(METADATA_LABEL, async_response.metadata)
 
-# Uncomment to run async example
 asyncio.run(async_example())

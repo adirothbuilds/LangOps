@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Optional
-from agentops.llm.type import LLMResponse
+from agentops.core.types import LLMResponse
 
 
 class BaseLLM(ABC):

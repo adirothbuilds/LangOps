@@ -1,6 +1,6 @@
 from pathlib import Path
 import pytest
-from agentops.parser.base import BaseParser
+from agentops import BaseParser
 import json
 import tempfile
 import os

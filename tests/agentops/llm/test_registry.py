@@ -1,5 +1,5 @@
 import unittest
-from agentops.llm.registry import LLMRegistry
+from agentops import LLMRegistry
 
 
 class TestLLMRegistry(unittest.TestCase):

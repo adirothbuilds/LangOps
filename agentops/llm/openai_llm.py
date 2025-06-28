@@ -1,5 +1,5 @@
-from agentops.llm.base import BaseLLM
-from agentops.llm.type import LLMResponse
+from agentops.core.base_llm import BaseLLM
+from agentops.core.types import LLMResponse
 from agentops.llm.registry import LLMRegistry
 
 import openai
@@ -10,7 +10,7 @@ from openai.types.chat import (
 from typing import Optional, List, Any, Dict, cast
 
 
-@LLMRegistry.register("OpenAILLM")
+@LLMRegistry.register(name="openai")
 class OpenAILLM(BaseLLM):
     """
     LLM client for OpenAI models using the openai Python package (v1+).

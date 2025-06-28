@@ -1,5 +1,5 @@
 import unittest
-from agentops.llm.base import BaseLLM
+from agentops import BaseLLM
 
 
 class TestBaseLLM(unittest.TestCase):

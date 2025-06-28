@@ -1,5 +1,5 @@
 import unittest
-from agentops.alert.registry import AlertRegistry
+from agentops import AlertRegistry
 
 
 class TestAlertRegistry(unittest.TestCase):

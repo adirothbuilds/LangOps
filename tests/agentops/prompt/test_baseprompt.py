@@ -1,6 +1,6 @@
 import unittest
-from agentops.prompt.base import BasePrompt
-from agentops.prompt.constants import PromptRole
+from agentops import BasePrompt
+from agentops import PromptRole
 
 
 class TestBasePrompt(unittest.TestCase):

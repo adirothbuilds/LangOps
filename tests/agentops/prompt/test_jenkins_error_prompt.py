@@ -1,6 +1,6 @@
 import unittest
-from agentops.prompt.constants import PromptRole
-from agentops.prompt.jenkins_error_prompt import JenkinsErrorPrompt
+from agentops import PromptRole
+from agentops.prompt import JenkinsErrorPrompt
 
 
 class TestJenkinsErrorPrompt(unittest.TestCase):

@@ -1,7 +1,9 @@
-from .base import BasePrompt
-from .constants import PromptRole
+from agentops.core.base_prompt import BasePrompt
+from agentops.core.types import PromptRole
+from agentops.prompt.registry import PromptRegistry
 
 
+@PromptRegistry.register(name="JenkinsErrorPrompt")
 class JenkinsErrorPrompt(BasePrompt):
     """
     Subclass of BasePrompt to handle error logs from Jenkins builds.

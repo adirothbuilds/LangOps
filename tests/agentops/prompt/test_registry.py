@@ -1,5 +1,5 @@
 import unittest
-from agentops.prompt.registry import PromptRegistry
+from agentops import PromptRegistry
 
 
 class TestPromptRegistry(unittest.TestCase):

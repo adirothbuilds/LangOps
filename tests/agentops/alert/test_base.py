@@ -1,5 +1,5 @@
 import unittest
-from agentops.alert.base import BaseAlert
+from agentops import BaseAlert
 
 
 class MockAlert(BaseAlert):

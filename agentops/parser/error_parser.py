@@ -1,8 +1,8 @@
-from .base import BaseParser
-from .registry import ParserRegistry
+from agentops.core.base_parser import BaseParser
+from agentops.parser.registry import ParserRegistry
 
 
-@ParserRegistry.register()
+@ParserRegistry.register(name="ErrorParser")
 class ErrorParser(BaseParser):
     """Parser that filters and returns only error logs from the input data."""
 

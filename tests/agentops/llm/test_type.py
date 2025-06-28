@@ -1,5 +1,5 @@
 import unittest
-from agentops.llm.type import LLMResponse
+from agentops import LLMResponse
 
 
 class TestLLMResponse(unittest.TestCase):

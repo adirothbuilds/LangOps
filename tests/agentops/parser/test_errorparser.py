@@ -1,4 +1,4 @@
-from agentops.parser.error_parser import ErrorParser
+from agentops.parser import ErrorParser
 import pytest
 import json
 
