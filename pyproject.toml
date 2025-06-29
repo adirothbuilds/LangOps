@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "agentops"
+name = "agentops-sdk"
 version = "0.1.0"
 description = "AI-powered failure analysis agent for CI/CD pipelines"
 authors = ["Adi Roth <adi.build.balance@gmail.com>"]

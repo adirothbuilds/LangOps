@@ -1,0 +1,50 @@
+
+Started by user Adi Roth
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/AgentOps-Build-Main
+
+[Git] Cloning the repository...
+ > git init /var/jenkins_home/workspace/AgentOps-Build-Main # timeout=10
+ > git fetch --tags --progress -- https://github.com/adirothbuilds/AgentOps.git +refs/heads/main:refs/remotes/origin/main
+ > git checkout -f origin/main
+
+[Poetry] Installing dependencies...
++ poetry install
+
+[Lint] Running flake8...
++ make lint
+agentops/llm/openai_llm.py:12:1: F401 'uuid' imported but unused
+agentops/agent/runner.py:33:5: E722 do not use bare 'except'
+agentops/core/registry.py:58:80: E501 line too long (92 > 79 characters)
+
+[Tests] Running pytest...
++ make test
+=========================== test session starts ============================
+platform linux -- Python 3.11.9, pytest-8.2.0
+collected 12 items
+
+tests/test_registry.py ............
+tests/test_openai_llm.py ..F
+
+=================================== FAILURES ===================================
+__________________________ test_response_parsing_failure _______________________
+
+    def test_response_parsing_failure():
+        response = {"id": None, "text": None}
+>       parsed = LLMResponse(**response)
+E       pydantic_core._pydantic_core.ValidationError: 2 validation errors for LLMResponse
+E         id
+E           field required (type=value_error.missing)
+E         text
+E           field required (type=value_error.missing)
+
+[Deploy] Uploading artifacts to Nexus...
++ curl -X POST -u $NEXUS_USER:$NEXUS_PASS http://nexus.local/repository/
+curl: (22) The requested URL returned error: 401 Unauthorized
+
+[Pipeline] sh
++ ./scripts/deploy.sh
+/var/jenkins_home/workspace/AgentOps-Build-Main/scripts/deploy.sh: line 42: unexpected EOF while looking for matching `''
+/var/jenkins_home/workspace/AgentOps-Build-Main/scripts/deploy.sh: line 43: syntax error: unexpected end of file
+
+Build step 'Execute shell' marked build as FAILURE
