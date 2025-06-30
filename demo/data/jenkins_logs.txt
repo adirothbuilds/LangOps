@@ -1,11 +1,11 @@
 
 Started by user Adi Roth
 Running as SYSTEM
-Building in workspace /var/jenkins_home/workspace/AgentOps-Build-Main
+Building in workspace /var/jenkins_home/workspace/langops-Build-Main
 
 [Git] Cloning the repository...
- > git init /var/jenkins_home/workspace/AgentOps-Build-Main # timeout=10
- > git fetch --tags --progress -- https://github.com/adirothbuilds/AgentOps.git +refs/heads/main:refs/remotes/origin/main
+ > git init /var/jenkins_home/workspace/langops-Build-Main # timeout=10
+ > git fetch --tags --progress -- https://github.com/adirothbuilds/langops.git +refs/heads/main:refs/remotes/origin/main
  > git checkout -f origin/main
 
 [Poetry] Installing dependencies...
@@ -13,9 +13,9 @@ Building in workspace /var/jenkins_home/workspace/AgentOps-Build-Main
 
 [Lint] Running flake8...
 + make lint
-agentops/llm/openai_llm.py:12:1: F401 'uuid' imported but unused
-agentops/agent/runner.py:33:5: E722 do not use bare 'except'
-agentops/core/registry.py:58:80: E501 line too long (92 > 79 characters)
+langops/llm/openai_llm.py:12:1: F401 'uuid' imported but unused
+langops/agent/runner.py:33:5: E722 do not use bare 'except'
+langops/core/registry.py:58:80: E501 line too long (92 > 79 characters)
 
 [Tests] Running pytest...
 + make test
@@ -44,7 +44,7 @@ curl: (22) The requested URL returned error: 401 Unauthorized
 
 [Pipeline] sh
 + ./scripts/deploy.sh
-/var/jenkins_home/workspace/AgentOps-Build-Main/scripts/deploy.sh: line 42: unexpected EOF while looking for matching `''
-/var/jenkins_home/workspace/AgentOps-Build-Main/scripts/deploy.sh: line 43: syntax error: unexpected end of file
+/var/jenkins_home/workspace/langops-Build-Main/scripts/deploy.sh: line 42: unexpected EOF while looking for matching `''
+/var/jenkins_home/workspace/langops-Build-Main/scripts/deploy.sh: line 43: syntax error: unexpected end of file
 
 Build step 'Execute shell' marked build as FAILURE

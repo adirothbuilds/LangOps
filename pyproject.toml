@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "agentops-sdk"
+name = "langops"
 version = "0.1.0"
 description = "AI-powered failure analysis agent for CI/CD pipelines"
 authors = ["Adi Roth <adi.build.balance@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
-    { include = "agentops" }
+    { include = "langops" }
 ]
 
 [tool.poetry.dependencies]
@@ -26,5 +26,5 @@ pytest-asyncio = "^0.21.0"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.mypy-agentops.llm.openai_llm]
+[tool.mypy-langops.llm.openai_llm]
 ignore_errors = true

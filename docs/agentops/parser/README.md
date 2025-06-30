@@ -1,6 +1,6 @@
-# agentops.parser Documentation
+# langops.parser Documentation
 
-Welcome to the documentation for the `agentops.parser` module. This package provides a flexible and extensible framework for building, registering, and using parsers for various data and log formats.
+Welcome to the documentation for the `langops.parser` module. This package provides a flexible and extensible framework for building, registering, and using parsers for various data and log formats.
 
 ## Overview
 
@@ -24,7 +24,7 @@ Welcome to the documentation for the `agentops.parser` module. This package prov
 ## Example Usage
 
 ```python
-from agentops.parser import ParserRegistry
+from langops.parser import ParserRegistry
 
 # Retrieve a registered parser by name
 ParserClass = ParserRegistry.get_parser('ErrorParser')
@@ -35,7 +35,7 @@ print(result)
 
 ## Contributing
 
-- Add new parser classes in the `agentops/parser/` directory.
+- Add new parser classes in the `langops/parser/` directory.
 - Document each parser in a separate markdown file in this folder.
 - Update this index as new parsers and features are added.
 
@@ -52,9 +52,9 @@ This module is designed to grow. Planned features include:
 ## Tests Reference
 
 Unit tests for all core parser components are located in:
-- `tests/agentops/parser/test_baseparser.py`
-- `tests/agentops/parser/test_errorparser.py`
-- `tests/agentops/parser/test_registry.py`
+- `tests/langops/parser/test_baseparser.py`
+- `tests/langops/parser/test_errorparser.py`
+- `tests/langops/parser/test_registry.py`
 
 These tests ensure the reliability and correctness of the parser framework. Please refer to them for usage examples and to guide your own test development.
 

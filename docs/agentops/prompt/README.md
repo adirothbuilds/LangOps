@@ -1,6 +1,6 @@
-# agentops.prompt Documentation
+# langops.prompt Documentation
 
-Welcome to the documentation for the `agentops.prompt` module. This package provides a flexible and extensible framework for building, registering, and using prompts for LLMs.
+Welcome to the documentation for the `langops.prompt` module. This package provides a flexible and extensible framework for building, registering, and using prompts for LLMs.
 
 ## Overview
 
@@ -25,7 +25,7 @@ Welcome to the documentation for the `agentops.prompt` module. This package prov
 ## Example Usage
 
 ```python
-from agentops.prompt import PromptRegistry
+from langops.prompt import PromptRegistry
 
 # Retrieve a registered prompt class by name
 PromptClass = PromptRegistry.get("custom")
@@ -36,7 +36,7 @@ print(rendered)
 
 ## Contributing
 
-- Add new prompt classes in the `agentops/prompt/` directory.
+- Add new prompt classes in the `langops/prompt/` directory.
 - Document each prompt in a separate markdown file in this folder.
 - Update this index as new prompts and features are added.
 
@@ -54,9 +54,9 @@ This module is designed to grow. Planned features include:
 
 Unit tests for all core prompt components are located in:
 
-- `tests/agentops/prompt/test_baseprompt.py`
-- `tests/agentops/prompt/test_registry.py`
-- `tests/agentops/prompt/test_jenkins_error_prompt.py`
+- `tests/langops/prompt/test_baseprompt.py`
+- `tests/langops/prompt/test_registry.py`
+- `tests/langops/prompt/test_jenkins_error_prompt.py`
 
 These tests ensure the reliability and correctness of the prompt framework. Please refer to them for usage examples and to guide your own test development.
 

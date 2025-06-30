@@ -2,7 +2,7 @@
 
 ## Overview
 
-`ParserRegistry` is a utility class for registering and managing parser classes in the `agentops.parser` module. It enables you to register parser classes using a decorator and retrieve or list them by name, supporting both inner-module and top-level parser implementations.
+`ParserRegistry` is a utility class for registering and managing parser classes in the `langops.parser` module. It enables you to register parser classes using a decorator and retrieve or list them by name, supporting both inner-module and top-level parser implementations.
 
 ## Class: ParserRegistry
 
@@ -37,7 +37,7 @@
 ## Example Usage
 
 ```python
-from agentops.parser import ParserRegistry, BaseParser
+from langops.parser import ParserRegistry, BaseParser
 
 @ParserRegistry.register()
 class MyParser(BaseParser):

@@ -53,7 +53,7 @@ Converts the error log lines to a JSON string.
 ## Example Usage
 
 ```python
-from agentops.parser import ErrorParser
+from langops.parser import ErrorParser
 
 log_content = """
 2025-06-21 10:00:00 INFO Starting process

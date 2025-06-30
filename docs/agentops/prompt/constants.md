@@ -13,7 +13,7 @@ The `PromptRole` enum defines the roles available for prompt messages.
 Use the `PromptRole` enum to specify roles for prompt messages:
 
 ```python
-from agentops.prompt.constants import PromptRole
+from langops.prompt.constants import PromptRole
 
 role = PromptRole.system
 ```

@@ -1,4 +1,4 @@
-# Makefile for agentops project
+# Makefile for langops project
 
 .PHONY: help lint test coverage install update build publish requirements clean
 
@@ -15,8 +15,8 @@ help:
 	@echo "  clean       - Remove Python build, test, and coverage artifacts"
 
 lint:
-	poetry run black agentops tests
-	poetry run mypy agentops
+	poetry run black langops tests
+	poetry run mypy langops
 
 test:
 	poetry run pytest --ignore=demo
@@ -43,6 +43,6 @@ requirements:
 	poetry export --without-hashes --format=requirements.txt > requirements.txt
 
 clean:
-	rm -rf .coverage coverage.xml htmlcov/ .pytest_cache/ __pycache__/ agentops/__pycache__/ agentops/*/__pycache__/ tests/__pycache__/ tests/*/__pycache__/
+	rm -rf .coverage coverage.xml htmlcov/ .pytest_cache/ __pycache__/ langops/__pycache__/ langops/*/__pycache__/ tests/__pycache__/ tests/*/__pycache__/
 	find . -type d -name '__pycache__' -exec rm -rf {} +
 	find . -type f -name '*.pyc' -delete

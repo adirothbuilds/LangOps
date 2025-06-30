@@ -1,6 +1,6 @@
-# agentops.alert Documentation
+# langops.alert Documentation
 
-Welcome to the documentation for the `agentops.alert` module. This package provides a flexible and extensible framework for building, registering, and using alerting mechanisms.
+Welcome to the documentation for the `langops.alert` module. This package provides a flexible and extensible framework for building, registering, and using alerting mechanisms.
 
 ## Overview
 
@@ -22,7 +22,7 @@ Welcome to the documentation for the `agentops.alert` module. This package provi
 ## Example Usage
 
 ```python
-from agentops.alert import AlertRegistry
+from langops.alert import AlertRegistry
 
 # Retrieve a registered alert class by name
 AlertClass = AlertRegistry.get("custom")
@@ -33,7 +33,7 @@ print(result)
 
 ## Contributing
 
-- Add new alert classes in the `agentops/alert/` directory.
+- Add new alert classes in the `langops/alert/` directory.
 - Document each alert in a separate markdown file in this folder.
 - Update this index as new alerts and features are added.
 
@@ -51,8 +51,8 @@ This module is designed to grow. Planned features include:
 
 Unit tests for all core alert components are located in:
 
-- `tests/agentops/alert/test_base.py`
-- `tests/agentops/alert/test_registry.py`
+- `tests/langops/alert/test_base.py`
+- `tests/langops/alert/test_registry.py`
 
 These tests ensure the reliability and correctness of the alert framework. Please refer to them for usage examples and to guide your own test development.
 

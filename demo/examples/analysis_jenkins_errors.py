@@ -1,5 +1,5 @@
 import os
-from agentops import ParserRegistry, PromptRegistry, LLMRegistry
+from langops import ParserRegistry, PromptRegistry, LLMRegistry
 
 JENKINS_LOG_PATH = "demo/data/jenkins_logs.txt"
 BUILD_ID = "12345"

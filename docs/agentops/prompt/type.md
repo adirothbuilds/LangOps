@@ -14,7 +14,7 @@ A `RenderedPrompt` is a dictionary with the following keys:
 Use the `RenderedPrompt` type to define the output of the `BasePrompt.render()` method:
 
 ```python
-from agentops.prompt.type import RenderedPrompt
+from langops.prompt.type import RenderedPrompt
 
 message: RenderedPrompt = {
     "role": "system",

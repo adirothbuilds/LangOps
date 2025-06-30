@@ -30,7 +30,7 @@ Renders the prompt messages into the format required by the LLM.
 To use the `JenkinsErrorPrompt`:
 
 ```python
-from agentops.prompt.jenkins_error_prompt import JenkinsErrorPrompt
+from langops.prompt.jenkins_error_prompt import JenkinsErrorPrompt
 
 prompt = JenkinsErrorPrompt(
     system_template="System message template",

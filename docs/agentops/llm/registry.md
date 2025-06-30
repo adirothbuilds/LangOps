@@ -14,7 +14,7 @@ Registers an LLM instance in the registry.
 
 #### Example
 ```python
-from agentops.llm.openai_llm import OpenAILLM
+from langops.llm.openai_llm import OpenAILLM
 
 llm_instance = OpenAILLM(api_key="your-api-key")
 register_llm("openai", llm_instance)
@@ -41,7 +41,7 @@ The registry can be extended to support external plugins or integrations. For ex
 
 #### Example
 ```python
-from agentops.llm.registry import LLMRegistry
+from langops.llm.registry import LLMRegistry
 
 @LLMRegistry.register("custom")
 class CustomLLM(BaseLLM):

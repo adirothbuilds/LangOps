@@ -1,5 +1,5 @@
 [run]
-source = agentops
+source = langops
 
 [report]
 show_missing = True

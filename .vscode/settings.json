@@ -1,6 +1,6 @@
 {
     "sonarlint.connectedMode.project": {
         "connectionId": "adirothbuilds",
-        "projectKey": "adirothbuilds_AgentOps"
+        "projectKey": "adirothbuilds_langops"
     }
 }

@@ -1,8 +1,8 @@
-# AgentOps
+# LangOps
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=coverage)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Python](https://img.shields.io/badge/Python-3.13-blue)](https://www.python.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![SDK](https://img.shields.io/badge/SDK-AgentOps-green)](https://github.com/adirothbuilds/AgentOps)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_LangOps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_LangOps) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_LangOps&metric=coverage)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_LangOps) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_LangOps&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_LangOps) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_LangOps&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_LangOps) [![Python](https://img.shields.io/badge/Python-3.13-blue)](https://www.python.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![SDK](https://img.shields.io/badge/SDK-LangOps-green)](https://github.com/adirothbuilds/LangOps)
 
-AgentOps is a modular SDK for building AI-powered DevOps tools.
+LangOps is a modular SDK for building AI-powered DevOps tools.
 It provides a flexible framework for parsing logs, interacting with LLMs, and analyzing failure patterns across CI/CD pipelines.
 Designed with extensibility in mind, it supports plug-and-play parsers, model-agnostic LLM clients, and clean abstractions for building intelligent automation agents.
 
@@ -43,7 +43,7 @@ Designed with extensibility in mind, it supports plug-and-play parsers, model-ag
 
 ## 📂 Project Structure
 
-- `agentops/` — Core library modules
+- `LangOps/` — Core library modules
   - `llm/` — Language model integrations
   - `parser/` — Log parsing and error extraction
   - `alert/` — Alerting mechanisms
@@ -57,16 +57,16 @@ Designed with extensibility in mind, it supports plug-and-play parsers, model-ag
 
 Detailed documentation for each module is available in the `docs/` directory:
 
-- [LLM Module](docs/agentops/llm/README.md): Language model integrations.
-- [Parser Module](docs/agentops/parser/README.md): Log parsing and error extraction.
-- [Alert Module](docs/agentops/alert/README.md): Alerting mechanisms.
-- [Prompt Module](docs/agentops/prompt/README.md): Flexible prompt handling for LLMs.
+- [LLM Module](docs/LangOps/llm/README.md): Language model integrations.
+- [Parser Module](docs/LangOps/parser/README.md): Log parsing and error extraction.
+- [Alert Module](docs/LangOps/alert/README.md): Alerting mechanisms.
+- [Prompt Module](docs/LangOps/prompt/README.md): Flexible prompt handling for LLMs.
 
 ---
 
 ## 🌟 Contributing
 
-We welcome contributions to AgentOps! Here's how you can get started:
+We welcome contributions to LangOps! Here's how you can get started:
 
 1. **Fork the repository** and clone it locally.
 2. **Create a new branch** for your feature or bug fix:
@@ -93,21 +93,21 @@ We welcome contributions to AgentOps! Here's how you can get started:
 
 ## 🔮 Future Features
 
-AgentOps is designed to expand its capabilities further. Planned features include:
+LangOps is designed to expand its capabilities further. Planned features include:
 
-- **AgentOps.Agent:**
+- **LangOps.Agent:**
   - Intelligent agents for automated log analysis and decision-making.
   - Integration with CI/CD pipelines for proactive error detection.
 
-- **AgentOps.Tool:**
+- **LangOps.Tool:**
   - A suite of tools for log visualization and debugging.
   - Enhanced filtering and search capabilities for large datasets.
 
-- **AgentOps.Alert:**
+- **LangOps.Alert:**
   - Real-time alerting system for critical errors.
   - Configurable thresholds and notification channels.
 
-These features aim to make AgentOps a comprehensive solution for failure analysis and log management.
+These features aim to make LangOps a comprehensive solution for failure analysis and log management.
 
 ---
 

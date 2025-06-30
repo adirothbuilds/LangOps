@@ -1,6 +1,6 @@
 import os
 import asyncio
-from agentops.llm import OpenAILLM
+from langops.llm import OpenAILLM
 
 TEXT_LABEL = "Text:"
 METADATA_LABEL = "Metadata:"

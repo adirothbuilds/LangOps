@@ -1,6 +1,6 @@
-# agentops.llm Documentation
+# langops.llm Documentation
 
-Welcome to the documentation for the `agentops.llm` module. This package provides a flexible and extensible framework for integrating with various language models, including OpenAI's GPT models.
+Welcome to the documentation for the `langops.llm` module. This package provides a flexible and extensible framework for integrating with various language models, including OpenAI's GPT models.
 
 ## Overview
 
@@ -25,7 +25,7 @@ Welcome to the documentation for the `agentops.llm` module. This package provide
 ## Example Usage
 
 ```python
-from agentops.llm.registry import get_llm
+from langops.llm.registry import get_llm
 
 # Retrieve a registered LLM by name
 llm_instance = get_llm('OpenAILLM')
@@ -35,7 +35,7 @@ print(response.text)
 
 ## Contributing
 
-- Add new LLM classes in the `agentops/llm/` directory.
+- Add new LLM classes in the `langops/llm/` directory.
 - Document each LLM in a separate markdown file in this folder.
 - Update this index as new LLMs and features are added.
 
@@ -53,10 +53,10 @@ This module is designed to grow. Planned features include:
 
 Unit tests for all core LLM components are located in:
 
-- `tests/agentops/llm/test_base.py`
-- `tests/agentops/llm/test_openai_llm.py`
-- `tests/agentops/llm/test_registry.py`
-- `tests/agentops/llm/test_type.py`
+- `tests/langops/llm/test_base.py`
+- `tests/langops/llm/test_openai_llm.py`
+- `tests/langops/llm/test_registry.py`
+- `tests/langops/llm/test_type.py`
 
 These tests ensure the reliability and correctness of the LLM framework. Please refer to them for usage examples and to guide your own test development.
 
