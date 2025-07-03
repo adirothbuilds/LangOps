@@ -37,15 +37,8 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           poetry config virtualenvs.in-project true
-
-      - name: Install dependencies
-        run: make install
-
-      - name: Run lint
-        run: make lint
-
-      - name: Run tests
-        run: make coverage
+      - name: Run lint and tests
+        run: make ci
 
       - name: Patch coverage for Sonar
         run: |

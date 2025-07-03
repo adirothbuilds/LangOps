@@ -27,8 +27,14 @@ coverage:
 	poetry run coverage xml
 	poetry run coverage html
 
-install:
-	poetry install
+install-dev:
+	poetry install --with dev
+
+install-prod:
+	poetry install --without dev
+
+ci:
+	install-dev lint coverage
 
 update:
 	poetry update
