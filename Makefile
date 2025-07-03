@@ -33,9 +33,6 @@ install-dev:
 install-prod:
 	poetry install --without dev
 
-ci:
-	install-dev lint coverage
-
 update:
 	poetry update
 
