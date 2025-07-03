@@ -28,6 +28,8 @@ coverage:
 	poetry run coverage html
 
 install-dev:
+	rm -f poetry.lock
+	poetry lock
 	poetry install --with dev
 
 install-prod:
