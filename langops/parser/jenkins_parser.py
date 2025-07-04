@@ -202,14 +202,15 @@ class JenkinsParser(BaseParser):
             "%m/%d/%Y %H:%M:%S",     # MM/DD/YYYY HH:MM:SS
         ]
 
-        for pattern, fmt in zip(timestamp_patterns, format_strings):
-            match = re.search(pattern, line)
-            if match:
-                try:
-                    timestamp_str = match.group(1)
-                    return datetime.strptime(timestamp_str, fmt)
-                except ValueError:
-                    continue
+        for pattern in timestamp_patterns:
+            matches = re.finditer(pattern, line)
+            for match in matches:
+                timestamp_str = match.group(1)
+                for fmt in format_strings:
+                    try:
+                        return datetime.strptime(timestamp_str, fmt)
+                    except ValueError:
+                        continue
         return None
 
     def get_stages_summary(
