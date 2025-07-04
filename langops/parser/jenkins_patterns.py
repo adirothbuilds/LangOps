@@ -5,7 +5,7 @@ from langops.core.types import SeverityLevel
 STAGE_PATTERNS = [
     # Primary Jenkins stage markers - highest priority
     re.compile(
-        r"\[([A-Za-z](?:[A-Za-z0-9\s]*))\]\s+(.*)", re.IGNORECASE
+        r"\[([A-Za-z][\w\s]*)\]\s+(.*)", re.IGNORECASE
     ),  # [Git] Cloning..., [Poetry] Installing..., etc.
     # Traditional stage patterns
     re.compile(r"\[Pipeline\]\s+\{\s*\((.+?)\)"),  # [Pipeline] { (stage_name)
