@@ -136,7 +136,7 @@ class JenkinsParser(BaseParser):
                 )  # Remove numbering
                 stage_name = re.sub(
                     r"\s*\[.*?\]$", "", stage_name
-                )  # Remove brackets at end
+                )  # Remove trailing bracketed annotations from stage names
 
                 # Handle Pipeline stages differently
                 if stage_name.lower() == "pipeline":
