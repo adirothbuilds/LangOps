@@ -195,14 +195,19 @@ class JenkinsParser(BaseParser):
             r"(\d{2}/\d{2}/\d{4}\s+\d{2}:\d{2}:\d{2})",  # MM/DD/YYYY HH:MM:SS
         ]
 
-        for pattern in timestamp_patterns:
+        format_strings = [
+            "%Y-%m-%dT%H:%M:%S.%f",  # ISO format with milliseconds
+            "%Y-%m-%dT%H:%M:%S",     # ISO format without milliseconds
+            "%b %d %Y %H:%M:%S",     # Mon DD YYYY HH:MM:SS
+            "%m/%d/%Y %H:%M:%S",     # MM/DD/YYYY HH:MM:SS
+        ]
+
+        for pattern, fmt in zip(timestamp_patterns, format_strings):
             match = re.search(pattern, line)
             if match:
                 try:
                     timestamp_str = match.group(1)
-                    # Normalize timestamp format
-                    timestamp_str = timestamp_str.replace(" ", "T").replace(",", ".")
-                    return datetime.fromisoformat(timestamp_str)
+                    return datetime.strptime(timestamp_str, fmt)
                 except ValueError:
                     continue
         return None
