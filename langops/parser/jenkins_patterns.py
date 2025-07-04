@@ -7,10 +7,10 @@ STAGE_PATTERNS = [
     re.compile(
         r"\[([A-Za-z][A-Za-z0-9\s]*)\]\s+(.*)"
     ),  # [Git] Cloning..., [Poetry] Installing..., etc.
-    # Pipeline stage markers
-    re.compile(r"\[Pipeline\]\s+(.+)"),  # [Pipeline] sh, [Pipeline] stage, etc.
     # Traditional stage patterns
     re.compile(r"\[Pipeline\]\s+\{\s*\((.+?)\)"),  # [Pipeline] { (stage_name)
+    # Pipeline stage markers
+    re.compile(r"\[Pipeline\]\s+(.+)"),  # [Pipeline] sh, [Pipeline] stage, etc.
     re.compile(r"Stage\s+['\"](.+?)['\"]"),  # Stage "Build"
     re.compile(r"Running in (.+)$"),  # Running in Build
     re.compile(r"\+\s+(.+?)\s+\["),  # + Build [
