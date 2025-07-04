@@ -192,3 +192,9 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+#  Visual Studio Code settings file. This file is used to store workspace-specific settings.
+#  It is recommended to not include it in version control, as it may contain user-specific
+#  configurations that are not relevant to other users.
+#  If you want to include it, you can uncomment the following line:
+.vscode/settings.json

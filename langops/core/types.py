@@ -1,10 +1,10 @@
 from enum import Enum
+from datetime import datetime
+from pydantic import BaseModel
 from typing import Any, Dict, Optional, TypedDict
 
 
 # langops.llm types:
-
-
 class LLMResponse:
     """
     Structure for LLM model responses.
@@ -30,8 +30,6 @@ class LLMResponse:
 
 
 # langops.prompt types:
-
-
 class PromptRole(Enum):
     """
     Enum for all supported roles in LLM prompts.
@@ -50,3 +48,26 @@ class RenderedPrompt(TypedDict):
 
     role: str
     content: str
+
+
+# langops.parser types:
+class SeverityLevel(str, Enum):
+    INFO = "info"
+    WARNING = "warning"
+    ERROR = "error"
+    CRITICAL = "critical"
+
+
+class LogEntry(BaseModel):
+    timestamp: Optional[datetime]
+    message: str
+    severity: SeverityLevel
+
+
+class StageLogs(BaseModel):
+    name: str
+    logs: list[LogEntry]
+
+
+class ParsedLogBundle(BaseModel):
+    stages: list[StageLogs]
