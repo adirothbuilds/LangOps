@@ -42,7 +42,7 @@ build:
 	poetry build
 
 publish:
-	poetry publish
+	poetry publish --build
 
 requirements:
 	poetry export --without-hashes --format=requirements.txt > requirements.txt
