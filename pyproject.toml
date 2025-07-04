@@ -1,10 +1,13 @@
 [tool.poetry]
 name = "langops"
-version = "0.1.0"
-description = "AI-powered failure analysis agent for CI/CD pipelines"
+version = "0.1.1"
+description = " = "LangOps is a modular SDK for parsing and analyzing CI/CD logs using AI. It provides a registry-based parser framework, LLM-ready JSON output, and plug-and-play pattern sets for tools like Jenkins, Docker, Sonar, JFrog, and more."
 authors = ["Adi Roth <adi.build.balance@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/adirothbuilds/langops"
+repository = "https://github.com/adirothbuilds/langops"
+documentation = "https://github.com/adirothbuilds/langops#readme"
 packages = [
     { include = "langops" }
 ]
