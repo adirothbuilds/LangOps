@@ -18,6 +18,7 @@ init(autoreset=True)
 JENKINS_LOG_PATH = "demo/data/jenkins_logs.txt"
 BUILD_ID = "12345"
 TIMESTAMP = "2023-10-01T12:00:00Z"
+CHARS_UNIT = " chars"
 
 
 def analyze_jenkins_errors_with_json(log_path: str, build_id: str, timestamp: str):
@@ -148,10 +149,10 @@ def compare_parsing_approaches(log_path: str):
         simple_json_size = len(str(errors))  # Rough estimate
         structured_json_size = len(parsed_data.model_dump_json())
         
-        print(Fore.WHITE + "   Raw data size: " + Fore.YELLOW + f"~{simple_json_size}" + Fore.WHITE + " chars" + Style.RESET_ALL)
-        print(Fore.WHITE + "   Structured JSON size: " + Fore.GREEN + f"{structured_json_size}" + Fore.WHITE + " chars" + Style.RESET_ALL)
+        print(Fore.WHITE + "   Raw data size: " + Fore.YELLOW + f"~{simple_json_size}" + Fore.WHITE + CHARS_UNIT + Style.RESET_ALL)
+        print(Fore.WHITE + "   Structured JSON size: " + Fore.GREEN + f"{structured_json_size}" + Fore.WHITE + CHARS_UNIT + Style.RESET_ALL)
         overhead_color = Fore.GREEN if structured_json_size - simple_json_size > 0 else Fore.RED
-        print(Fore.WHITE + "   Structure overhead: " + overhead_color + f"+{structured_json_size - simple_json_size}" + Fore.WHITE + " chars" + Style.RESET_ALL)
+        print(Fore.WHITE + "   Structure overhead: " + overhead_color + f"+{structured_json_size - simple_json_size}" + Fore.WHITE + CHARS_UNIT + Style.RESET_ALL)
         
     print(Fore.GREEN + Style.BRIGHT + "\n✅ Structured approach provides:" + Style.RESET_ALL)
     benefits = [

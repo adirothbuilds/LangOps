@@ -12,7 +12,7 @@ STAGE_PATTERNS = [
     # Traditional stage patterns
     re.compile(r"\[Pipeline\]\s+\{\s*\((.+?)\)"),  # [Pipeline] { (stage_name)
     re.compile(r"Stage\s+['\"](.+?)['\"]"),  # Stage "Build"
-    re.compile(r"Running in (.+?)$"),  # Running in Build
+    re.compile(r"Running in (.+)$"),  # Running in Build
     re.compile(r"\+\s+(.+?)\s+\["),  # + Build [
     # Build step markers
     re.compile(r"Build step\s+['\"](.+?)['\"]"),  # Build step 'Execute shell'

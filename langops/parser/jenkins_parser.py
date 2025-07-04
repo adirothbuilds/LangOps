@@ -120,12 +120,7 @@ class JenkinsParser(BaseParser):
         for pattern in self.stage_patterns:
             match = pattern.search(line)
             if match:
-                # For the primary [Stage] pattern, extract the stage name
-                if pattern.pattern.startswith(r"\[([A-Za-z]"):
-                    stage_name = match.group(1).strip()
-                else:
-                    # For other patterns, use the first capture group
-                    stage_name = match.group(1).strip()
+                stage_name = match.group(1).strip()
 
                 # Skip invalid or unwanted stage names
                 if (
