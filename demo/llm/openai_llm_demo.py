@@ -1,7 +1,15 @@
+##!/usr/bin/env python3
+"""
+This script demonstrates how to use the OpenAILLM class from langops.llm
+to interact with OpenAI's language models. It includes examples of both
+legacy completion and chat completion, as well as asynchronous usage.
+"""
+
 import os
 import asyncio
 from langops.llm import OpenAILLM
 
+# Constants for demo
 TEXT_LABEL = "Text:"
 METADATA_LABEL = "Metadata:"
 

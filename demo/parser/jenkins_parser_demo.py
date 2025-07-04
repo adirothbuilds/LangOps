@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """
-Test script to verify the enhanced JenkinsParser functionality.
+This script demonstrates the enhanced JenkinsParser functionality.
+It tests the parser with various log formats, severity levels,
+and provides a summary of parsed stages.
 """
 
 from langops.parser.jenkins_parser import JenkinsParser
@@ -31,7 +33,15 @@ Running in Cleanup
 
 
 def test_enhanced_parser():
-    """Test the enhanced Jenkins parser."""
+    """
+    Test the enhanced Jenkins parser.
+    This function demonstrates how to use the JenkinsParser
+    to parse Jenkins logs with different severity levels and formats.
+    It also provides a summary of the parsed stages.
+    
+    Returns:
+        None
+    """
     parser = JenkinsParser()
     
     print("Testing enhanced JenkinsParser...")
