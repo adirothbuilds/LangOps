@@ -1,57 +1,79 @@
-# ParserRegistry Documentation
+# ParserRegistry
 
 ## Overview
 
-`ParserRegistry` is a utility class for registering and managing parser classes in the `langops.parser` module. It enables you to register parser classes using a decorator and retrieve or list them by name, supporting both inner-module and top-level parser implementations.
+`ParserRegistry` allows registration and retrieval of parsers by name. It serves as a central hub for managing parser instances in the LangOps SDK.
 
-## Class: ParserRegistry
+## API Documentation
 
-### Class Methods
+### Methods
 
-- `register(name=None)`
-  - Decorator to register a parser class with an optional name.
-  - Args:
-    - `name` (str, optional): Name to register the parser under. If not provided, the class name is used.
-  - Usage:
-  
-    ```python
-    @ParserRegistry.register()
-    class MyParser(BaseParser):
-        ...
-    
-    @ParserRegistry.register('custom_name')
-    class AnotherParser(BaseParser):
-        ...
-    ```
+#### `register(name=None)`
 
-- `get_parser(name)`
-  - Retrieve a registered parser class by name.
-  - Args:
-    - `name` (str): Name of the parser class.
-  - Returns: The parser class if found, else `None`.
+**Description**: Decorator to register a parser class with an optional name.
 
-- `list_parsers()`
-  - List all registered parser names.
-  - Returns: List of registered parser names as strings.
+**Arguments**:
 
-## Example Usage
+- `name` (str, optional): Name to register the parser under. If not provided, the class name is used.
+
+**Returns**:
+
+- `Type`: The registered parser class.
+
+**Examples**:
 
 ```python
-from langops.parser import ParserRegistry, BaseParser
+from langops.parser.registry import ParserRegistry
 
-@ParserRegistry.register()
-class MyParser(BaseParser):
-    def parse(self, data):
-        return data
+@ParserRegistry.register(name="CustomParser")
+class CustomParser:
+    pass
 
-parser_cls = ParserRegistry.get_parser('MyParser')
-print(parser_cls)  # <class 'MyParser'>
-
-print(ParserRegistry.list_parsers())  # ['MyParser']
+# Retrieve the parser
+parser_cls = ParserRegistry.get("CustomParser")
+parser_instance = parser_cls()
 ```
 
-## Notes
+#### `get(name)`
 
-- Use the decorator on any parser class you want to register.
-- You can register multiple parsers, including inner-module and top-level classes.
-- Registered parsers can be retrieved and instantiated dynamically by name.
+**Description**: Retrieve a registered parser class by name.
+
+**Arguments**:
+
+- `name` (str): Name of the registered parser.
+
+**Returns**:
+
+- `Type`: The parser class registered under the given name.
+
+**Examples**:
+
+```python
+from langops.parser.registry import ParserRegistry
+
+parser_cls = ParserRegistry.get("CustomParser")
+parser_instance = parser_cls()
+```
+
+---
+
+## Usage
+
+To register a parser, use the `@ParserRegistry.register` decorator. To retrieve a parser, use the `get` method.
+
+```python
+from langops.parser.registry import ParserRegistry
+
+@ParserRegistry.register(name="ErrorParser")
+class ErrorParser:
+    pass
+
+error_parser_cls = ParserRegistry.get("ErrorParser")
+error_parser_instance = error_parser_cls()
+```
+
+---
+
+## Integration
+
+`ParserRegistry` integrates seamlessly with other modules like `ErrorParser` and `JenkinsParser`. For example, you can register these parsers and use them in a pipeline for comprehensive log analysis.

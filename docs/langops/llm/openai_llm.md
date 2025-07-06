@@ -2,73 +2,146 @@
 
 ## Overview
 
-The `OpenAILLM` class provides integration with OpenAI's language models, enabling both synchronous and asynchronous completion methods. It supports legacy string prompts and multi-role chat prompts. This class is designed to simplify interaction with OpenAI's API, providing helper methods for preparing messages, extracting text, and creating metadata.
+`OpenAILLM` integrates OpenAI's Python package for synchronous and asynchronous LLM completions. It supports routing requests to the correct endpoint based on the model type and prompt format.
 
-## Methods
+## API Documentation
 
-### `complete`
+### Attributes
+
+#### `CHAT_MODELS`
+
+**Description**: A set of model names that support chat completions.
+
+**Type**: `set`
+
+---
+
+### Methods
+
+#### `__init__(api_key=None, model=None)`
+
+**Description**: Initializes the `OpenAILLM` instance.
+
+**Arguments**:
+
+- `api_key` (Optional[str]): The API key for OpenAI. Defaults to None.
+- `model` (Optional[str]): The model name to use. Defaults to None.
+
+**Returns**: None
+
+**Examples**:
 
 ```python
-complete(prompt: str | List[Dict[str, str]]) -> CompletionResponse
+from langops.llm.openai_llm import OpenAILLM
+
+llm = OpenAILLM(api_key="your-api-key", model="gpt-4")
 ```
 
-Executes a synchronous completion request to OpenAI's API.
+#### `_is_chat_model(model_name=None)`
 
-#### Parameters
+**Description**: Determines whether the given model name supports chat completions.
 
-- `prompt`: A string or a list of dictionaries representing the chat prompt. For example:
-  - String prompt: `"Tell me a joke about AI."`
-  - Chat prompt: `[{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": "What's the weather like in Paris today?"}]`
+**Arguments**:
 
-#### Returns
+- `model_name` (Optional[str]): The model name to check. Defaults to None.
 
-- `CompletionResponse`: Contains the generated text and metadata. The `text` field contains the response from the model, and the `metadata` field includes additional information such as token usage.
+**Returns**:
 
-#### Example
+- `bool`: True if the model supports chat completions, False otherwise.
+
+**Examples**:
 
 ```python
-response = llm.complete("Tell me a joke about AI.")
+llm = OpenAILLM(api_key="your-api-key", model="gpt-4")
+print(llm._is_chat_model("gpt-4"))
+```
+
+#### `complete(prompt)`
+
+**Description**: Generates a synchronous completion for the given prompt.
+
+**Arguments**:
+
+- `prompt` (str): The input prompt for the model.
+
+**Returns**:
+
+- `LLMResponse`: The response from the model.
+
+**Examples**:
+
+```python
+llm = OpenAILLM(api_key="your-api-key", model="gpt-4")
+response = llm.complete("What is the capital of France?")
 print(response.text)
-print(response.metadata)
 ```
 
-### `acomplete`
+#### `acomplete(prompt)`
+
+**Description**: Generates an asynchronous completion for the given prompt.
+
+**Arguments**:
+
+- `prompt` (str): The input prompt for the model.
+
+**Returns**:
+
+- `LLMResponse`: The response from the model.
+
+**Examples**:
 
 ```python
-acomplete(prompt: str | List[Dict[str, str]]) -> CompletionResponse
-```
-Executes an asynchronous completion request to OpenAI's API.
+import asyncio
+from langops.llm.openai_llm import OpenAILLM
 
-#### Parameters
+async def main():
+    llm = OpenAILLM(api_key="your-api-key", model="gpt-4")
+    response = await llm.acomplete("What is the capital of France?")
+    print(response.text)
 
-- `prompt`: A string or a list of dictionaries representing the chat prompt. The format is identical to the `complete` method.
-
-#### Returns
-
-- `CompletionResponse`: Contains the generated text and metadata.
-
-#### Example
-
-```python
-async_response = await llm.acomplete(chat_prompt)
-print(async_response.text)
-print(async_response.metadata)
+asyncio.run(main())
 ```
 
-## Helper Methods
-
-### `_prepare_messages`
-
-Prepares the messages for OpenAI API requests. This method converts user inputs into the format required by OpenAI's API.
-
-### `_extract_text_from_response`
-
-Extracts the text from the OpenAI API response. This method ensures that the response is parsed correctly and handles edge cases.
-
-### `_create_metadata`
-
-Creates metadata from the OpenAI API response. Metadata includes information such as token usage, model name, and request duration.
+---
 
 ## Usage
 
-Refer to the demo script `demo/openai_llm_demo.py` for usage examples. This script demonstrates how to use both synchronous and asynchronous methods, as well as how to handle different types of prompts.
+To use `OpenAILLM`, instantiate it with your OpenAI API key and model name. You can use the `complete` method for synchronous completions or the `acomplete` method for asynchronous completions.
+
+```python
+from langops.llm.openai_llm import OpenAILLM
+
+llm = OpenAILLM(api_key="your-api-key", model="gpt-4")
+
+# Synchronous completion
+response = llm.complete("Hello, world!")
+print(response.text)
+
+# Asynchronous completion
+import asyncio
+async def main():
+    response = await llm.acomplete("Hello, world!")
+    print(response.text)
+
+asyncio.run(main())
+```
+
+---
+
+## Integration
+
+`OpenAILLM` can be registered with `LLMRegistry` for seamless integration into pipelines.
+
+```python
+from langops.llm.registry import LLMRegistry
+from langops.llm.openai_llm import OpenAILLM
+
+@LLMRegistry.register(name="openai")
+class OpenAILLM:
+    pass
+
+llm_cls = LLMRegistry.get_llm("openai")
+llm_instance = llm_cls(api_key="your-api-key")
+response = llm_instance.complete("Hello, world!")
+print(response.text)
+```

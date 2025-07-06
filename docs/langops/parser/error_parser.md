@@ -1,75 +1,35 @@
-# ErrorParser Documentation
+# ErrorParser
 
 ## Overview
 
-`ErrorParser` is a parser class that extracts error log lines from log file content. It is registered in the parser registry and extends `BaseParser`, leveraging its flexible filtering utilities.
+`ErrorParser` filters and returns only error logs from the input data.
 
-### Inherits
-
-- `BaseParser`
-
-### Registration
-
-- Registered automatically with `@ParserRegistry.register()`.
+## API Documentation
 
 ### Methods
 
-#### parse(self, data)
+#### `parse(data)`
 
-Parses the input log content and returns only error log lines.
+**Description**: Parse the input data and return only error log lines.
 
-**Args:**
+**Arguments**:
 
 - `data` (str): The log file content as a string.
 
-**Returns:**
+**Returns**:
 
-- `list`: List of error log lines (matching 'err', 'error', 'ERR', 'ERROR', etc., case-insensitive).
+- `list`: List of error log lines.
 
-#### to_dict(cls, parsed_result)
+---
 
-Converts the list of error log lines to a dictionary.
+## Usage
 
-**Args:**
-
-- `parsed_result` (list): List of error log lines.
-
-**Returns:**
-
-- `dict`: Dictionary with error log lines under the 'errors' key.
-
-#### to_json(cls, parsed_result)
-
-Converts the error log lines to a JSON string.
-
-**Args:**
-
-- `parsed_result` (list): List of error log lines.
-
-**Returns:**
-
-- `str`: JSON string representation of the error log lines.
-
-## Example Usage
+To use `ErrorParser`, instantiate it and call the `parse` method with log data.
 
 ```python
-from langops.parser import ErrorParser
-
-log_content = """
-2025-06-21 10:00:00 INFO Starting process
-2025-06-21 10:01:00 ERROR Failed to connect
-2025-06-21 10:02:00 err Disk full
-2025-06-21 10:03:00 WARNING Low memory
-"""
+from langops.parser.error_parser import ErrorParser
 
 parser = ErrorParser()
-error_lines = parser.parse(log_content)
-print(error_lines)  # ['2025-06-21 10:01:00 ERROR Failed to connect', '2025-06-21 10:02:00 err Disk full']
-print(ErrorParser.to_json(error_lines))
+errors = parser.parse("log content here")
+print(errors)
 ```
-
-## Notes
-
-- Uses a regex pattern to match any common error keyword (case-insensitive).
-- Leverages the improved `filter_log_lines` from `BaseParser` for robust filtering.
-- Can be extended for more advanced error log extraction if needed.

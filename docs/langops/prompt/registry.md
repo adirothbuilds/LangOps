@@ -1,38 +1,95 @@
 # PromptRegistry
 
-The `PromptRegistry` class provides a registry for managing different prompt classes.
+## Overview
 
-## Methods
+`PromptRegistry` is a central hub for managing prompt classes. It allows registration and retrieval of prompts by name.
 
-### `register(name, prompt_class)`
+## API Documentation
 
-Registers a prompt class with a given name.
+### Methods
 
-- **Args**:
-  - `name (str)`: The name of the prompt class.
-  - `prompt_class (Type[BasePrompt])`: The prompt class to register.
-- **Raises**:
-  - `ValueError`: If the name is already registered.
+#### `register(name=None)`
 
-### `get(name)`
+**Description**: Decorator to register a prompt class with an optional name.
 
-Retrieves a registered prompt class by name.
+**Arguments**:
 
-- **Args**:
-  - `name (str)`: The name of the prompt class.
-- **Returns**:
-  - `Type[BasePrompt]`: The registered prompt class.
+- `name` (str, optional): Name to register the prompt under. If not provided, the class name is used.
+
+**Returns**:
+
+- `function`: Decorator that registers the prompt class.
+
+**Examples**:
+
+```python
+from langops.prompt.registry import PromptRegistry
+
+@PromptRegistry.register(name="CustomPrompt")
+class CustomPrompt:
+    pass
+
+# Retrieve the prompt
+prompt_cls = PromptRegistry.get_prompt("CustomPrompt")
+prompt_instance = prompt_cls()
+```
+
+#### `get_prompt(name)`
+
+**Description**: Retrieve a prompt class by name.
+
+**Arguments**:
+
+- `name` (str): Name of the prompt class.
+
+**Returns**:
+
+- `type`: The prompt class if found, else None.
+
+**Examples**:
+
+```python
+from langops.prompt.registry import PromptRegistry
+
+prompt_cls = PromptRegistry.get_prompt("CustomPrompt")
+prompt_instance = prompt_cls()
+```
+
+#### `list_prompts()`
+
+**Description**: List all registered prompt names.
+
+**Returns**:
+
+- `list`: List of registered prompt names.
+
+**Examples**:
+
+```python
+from langops.prompt.registry import PromptRegistry
+
+print(PromptRegistry.list_prompts())
+```
+
+---
 
 ## Usage
 
-To register a prompt class:
+To register a prompt, use the `@PromptRegistry.register` decorator. To retrieve a prompt, use the `get_prompt` method.
 
 ```python
-PromptRegistry.register("custom", CustomPrompt)
+from langops.prompt.registry import PromptRegistry
+
+@PromptRegistry.register(name="JenkinsErrorPrompt")
+class JenkinsErrorPrompt:
+    pass
+
+jenkins_prompt_cls = PromptRegistry.get_prompt("JenkinsErrorPrompt")
+jenkins_prompt_instance = jenkins_prompt_cls()
 ```
 
-To retrieve a registered prompt class:
+---
 
-```python
-prompt_class = PromptRegistry.get("custom")
-```
+## Integration
+
+`PromptRegistry` integrates seamlessly with other modules like `JenkinsErrorPrompt`. For example, you can register `JenkinsErrorPrompt` and use it in a pipeline for prompt-based tasks.
