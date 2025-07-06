@@ -4,7 +4,7 @@ import re
 old_pattern = re.compile(r"\[([A-Za-z][A-Za-z0-9\s]*)\]\s+(.*)")
 
 # New regex pattern
-new_pattern = re.compile(r"\[([A-Za-z][\w\s]*)\]\s+(.*)", re.IGNORECASE)
+new_pattern = re.compile(r"\[([A-Za-z][A-Za-z0-9\s]*)\]\s+(.*)", re.IGNORECASE)
 
 # Sample test strings
 test_strings = [
