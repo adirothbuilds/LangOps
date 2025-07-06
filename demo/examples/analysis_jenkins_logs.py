@@ -2,6 +2,18 @@
 """
 Enhanced demo showing how to use JenkinsParser with JSON output for LLM analysis.
 This extends the original analysis_jenkins_errors.py to include JSON-based prompts.
+
+This script demonstrates:
+1. Parsing Jenkins logs with structured data extraction.
+2. Converting parsed data to JSON format.
+3. Using JSON data in LLM prompts for better context and analysis.
+4. Comparing traditional error parsing vs structured JenkinsParser approach.
+5. Displaying results with colored terminal output for better readability.
+
+This is a more advanced example that showcases the power of structured data
+and how it can improve LLM interactions, especially for complex log analysis tasks.
+This script requires the `langops` library and an OpenAI API key set in the environment.
+Make sure to install the required dependencies and set up your environment before running this script.
 """
 
 import os
@@ -15,7 +27,8 @@ load_dotenv()
 # Initialize colorama for colored terminal output
 init(autoreset=True)
 
-JENKINS_LOG_PATH = "demo/data/jenkins_logs.txt"
+# Constants for demo
+JENKINS_LOG_PATH = "demo/simulate_data/jenkins_logs.txt"
 BUILD_ID = "12345"
 TIMESTAMP = "2023-10-01T12:00:00Z"
 CHARS_UNIT = " chars"
@@ -24,6 +37,16 @@ CHARS_UNIT = " chars"
 def analyze_jenkins_errors_with_json(log_path: str, build_id: str, timestamp: str):
     """
     Analyze Jenkins errors using both the traditional approach and JSON-based prompts.
+    This function demonstrates how to parse Jenkins logs, extract structured data,
+    and use it to query an LLM for insights.
+    
+    Args:
+        log_path (str): Path to the Jenkins log file.
+        build_id (str): Unique identifier for the build.
+        timestamp (str): Timestamp of the build.
+        
+    Returns:
+        None
     """
     print(Fore.BLUE + Style.BRIGHT + "🔍 Parsing Jenkins log for errors using JenkinsParser..." + Style.RESET_ALL)
     
@@ -121,6 +144,14 @@ Please structure your response with clear sections and prioritize critical issue
 def compare_parsing_approaches(log_path: str):
     """
     Compare traditional ErrorParser vs new JenkinsParser approaches.
+    This function demonstrates the differences in parsing Jenkins logs
+    using both methods and highlights the benefits of structured data.
+    
+    Args:
+        log_path (str): Path to the Jenkins log file.
+        
+    Returns:
+        None
     """
     print(Fore.MAGENTA + Style.BRIGHT + "\n🔬 Comparing Parsing Approaches:" + Style.RESET_ALL)
     print(Fore.CYAN + "=" * 50 + Style.RESET_ALL)
@@ -167,6 +198,11 @@ def compare_parsing_approaches(log_path: str):
 
 
 if __name__ == "__main__":
+    """
+    Main entry point for the demo script.
+    This function initializes the demo, checks for the log file,
+    and runs the analysis and comparison functions.
+    """
     print(Fore.CYAN + r"""
      _        _______  _        _______  _______  _______  _______ 
     ( \      (  ___  )( (    /|(  ____ \(  ___  )(  ____ )(  ____ \

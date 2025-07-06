@@ -1,11 +1,29 @@
+#!/usr/bin/env python3
+"""
+This script analyzes Jenkins logs to identify errors and generate insights using a language model.
+It demonstrates how to parse logs, extract structured data, and query an LLM for insights.
+"""
+
 import os
 from langops import ParserRegistry, PromptRegistry, LLMRegistry
 
-JENKINS_LOG_PATH = "demo/data/jenkins_logs.txt"
+# Constants for demo
+JENKINS_LOG_PATH = "demo/simulate_data/jenkins_logs.txt"
 BUILD_ID = "12345"
 TIMESTAMP = "2023-10-01T12:00:00Z"
 
 def analyze_jenkins_errors(log_path: str, build_id: str, timestamp: str):
+    """
+    Analyze Jenkins errors by parsing the log file and querying an LLM for insights.
+    
+    Args:
+        log_path (str): Path to the Jenkins log file.
+        build_id (str): Unique identifier for the build.
+        timestamp (str): Timestamp of the build.
+        
+    Returns:
+        None
+    """
     print("Parsing Jenkins log for errors...")
     error_parser = ParserRegistry.get_parser("ErrorParser")
     errors = error_parser.from_file(log_path)

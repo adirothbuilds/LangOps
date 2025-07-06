@@ -4,15 +4,16 @@
 
 help:
 	@echo "Available targets:"
-	@echo "  lint        - Run code format and static analysis (black, mypy)"
-	@echo "  test        - Run unit tests with pytest"
-	@echo "  coverage    - Run tests with coverage report"
-	@echo "  install     - Install dependencies with poetry"
-	@echo "  update      - Update dependencies with poetry"
-	@echo "  build       - Build the package with poetry"
-	@echo "  publish     - Publish the package with poetry"
-	@echo "  requirements- Export requirements.txt for local development"
-	@echo "  clean       - Remove Python build, test, and coverage artifacts"
+	@echo "  lint          - Run code format and static analysis (black, mypy)"
+	@echo "  test          - Run unit tests with pytest"
+	@echo "  coverage      - Run tests with coverage report"
+	@echo "  install-dev   - Install all dependencies including dev with poetry"
+	@echo "  install-prod  - Install only production dependencies with poetry"
+	@echo "  update        - Update dependencies with poetry"
+	@echo "  build         - Build the package with poetry"
+	@echo "  publish       - Publish the package with poetry"
+	@echo "  requirements  - Export requirements.txt for local development"
+	@echo "  clean         - Remove Python build, test, and coverage artifacts"
 
 lint:
 	poetry run black langops tests

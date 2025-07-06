@@ -1,116 +1,141 @@
-# LangOps
+# LangOps – Modular AI SDK for DevOps Log Intelligence
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=coverage)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Python](https://img.shields.io/badge/Python-3.13-blue)](https://www.python.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![SDK](https://img.shields.io/badge/SDK-LangOps-green)](https://github.com/adirothbuilds/LangOps)
-
-LangOps is a modular SDK for building AI-powered DevOps tools.
-It provides a flexible framework for parsing logs, interacting with LLMs, and analyzing failure patterns across CI/CD pipelines.
-Designed with extensibility in mind, it supports plug-and-play parsers, model-agnostic LLM clients, and clean abstractions for building intelligent automation agents.
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=coverage)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=adirothbuilds_AgentOps&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=adirothbuilds_AgentOps) [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![LangOps SDK](https://img.shields.io/badge/SDK-LangOps-green)](https://github.com/adirothbuilds/LangOps)
 
 ---
 
-## 🚀 Features
+LangOps is a **modular SDK** designed for DevOps and SRE professionals for building intelligent log-analysis pipelines and AI-powered DevOps agents. It is open-source and community-driven, making it easy to contribute and extend.
 
-- **LLM Integration:** Built-in support for OpenAI's GPT models with synchronous and asynchronous completions.
-- **Abstract Base Classes:** Consistent design for log parsing and language model integration.
-- **Error Extraction:** Advanced utilities for filtering and extracting error logs.
-- **Parser Registry:** Decorator-based system for managing parsers.
-- **File Utilities:** Tools for handling and filtering log files.
-- **100% Test Coverage:** Comprehensive unit tests for all components.
+## Why LangOps?
 
----
+As a DevOps engineer, you often face challenges like debugging CI/CD failures, analyzing massive logs, and crafting effective prompts for language models. LangOps streamlines this process through:
 
-## 🛠️ Quick Start
+- **Plug-and-Play Architecture**: Easily integrate parsers, LLMs, and prompt builders into your workflows.
+- **AI-Powered Insights**: Use GPT models to analyze logs and explain failure causes.
+- **Extensibility**: Register custom modules to tailor the SDK to your needs.
 
-1. **Install dependencies:**
-
-   ```sh
-   poetry install
-   ```
-
-2. **Run tests:**
-
-   ```sh
-   make test
-   ```
-
-3. **Run coverage:**
-
-   ```sh
-   make coverage
-   ```
+Whether you're building auto-triage agents or streamlining log analysis, LangOps empowers you to automate smarter.
 
 ---
 
-## 📂 Project Structure
+## ✨ Features
 
-- `LangOps/` — Core library modules
-  - `llm/` — Language model integrations
-  - `parser/` — Log parsing and error extraction
-  - `alert/` — Alerting mechanisms
-  - `prompt/` — Flexible prompt handling for LLMs
-- `tests/` — Unit tests for all modules
-- `docs/` — Documentation for the project
+- 🔍 Extract meaningful errors from massive CI logs with a single parser.
+- 🤖 Analyze logs with GPT-powered language models and explain failure causes.
+- 🧰 Register your own parsers and prompt builders in a plug-and-play way.
+- 🧪 Run comprehensive unit tests with full `pytest` + `coverage` integration.
 
 ---
 
-## 📖 Documentation
+## ⚡ Quick Start
 
-Detailed documentation for each module is available in the `docs/` directory:
+Install LangOps directly from PyPI:
 
-- [LLM Module](docs/LangOps/llm/README.md): Language model integrations.
-- [Parser Module](docs/LangOps/parser/README.md): Log parsing and error extraction.
-- [Alert Module](docs/LangOps/alert/README.md): Alerting mechanisms.
-- [Prompt Module](docs/LangOps/prompt/README.md): Flexible prompt handling for LLMs.
+```bash
+pip install langops
+# Optional: install [dev] extras if contributing
+```
 
----
+Then import and start using it:
 
-## 🌟 Contributing
+```python
+from langops.parser import ErrorParser 
+from langops.prompt import JenkinsErrorPrompt
+from langops.llm import OpenAILLM
 
-We welcome contributions to LangOps! Here's how you can get started:
 
-1. **Fork the repository** and clone it locally.
-2. **Create a new branch** for your feature or bug fix:
+# Example usage
+parser = ErrorParser()
+errors = parser.from_file("path/to/logfile.log")
 
-   ```sh
-   git checkout -b feature/my-new-feature
-   ```
+prompter = JenkinsErrorPrompt(build_id="build_id", timestamp="timestamp")
+prompt.add_user_prompt(errors)
+messages = prompt.render_prompts()
 
-3. **Make your changes** and ensure all tests pass:
+client = OpenAILLM(api_key="your-openai-api-key")
+response = client.complete(messages)
+print("LLM response:\n")
+print(response.text)
+print("\nLLM metadata:\n")
+print(response.metadata)
+```
 
-   ```sh
-   make test
-   ```
-
-4. **Submit a pull request** with a clear description of your changes.
-
-### Contributor Guidelines
-
-- Follow the [Code of Conduct](CODE_OF_CONDUCT.md).
-- Write clear commit messages and document your code.
-- Ensure your changes are covered by tests.
-
----
-
-## 🔮 Future Features
-
-LangOps is designed to expand its capabilities further. Planned features include:
-
-- **LangOps.Agent:**
-  - Intelligent agents for automated log analysis and decision-making.
-  - Integration with CI/CD pipelines for proactive error detection.
-
-- **LangOps.Tool:**
-  - A suite of tools for log visualization and debugging.
-  - Enhanced filtering and search capabilities for large datasets.
-
-- **LangOps.Alert:**
-  - Real-time alerting system for critical errors.
-  - Configurable thresholds and notification channels.
-
-These features aim to make LangOps a comprehensive solution for failure analysis and log management.
+📚 For advanced usage examples, check the [`demo/`](demo) folder.
 
 ---
 
-## 📜 License
+## 📦 Project Structure
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+```bash
+langops/
+├── parser/   # Log parsers and error extractors
+├── llm/      # Model integrations (OpenAI, etc.)
+├── prompt/   # Prompt handling and injection
+├── alert/    # Alert system hooks (in progress)
+├── core/     # Shared logic and utilities
+tests/        # Unit tests for every module
+docs/         # Markdown docs per module
+demo/         # Examples and data
+```
+
+---
+
+## 📚 Module Documentation
+
+Each module has a dedicated README:
+
+- [`core/`](docs/core/index.md): Foundational classes and utilities for AI-driven workflows
+- [`parser/`](docs/langops/parser/index.md): Tools for parsing and filtering logs, including specialized parsers for Jenkins logs and error logs.
+- [`llm/`](docs/langops/llm/index.md): Async-ready GPT client with structured response interface
+- [`prompt/`](docs/langops/prompt/index.md): Prompt building and formatting utilities
+- [`alert/`](docs/langops/alert/index.md): Alert templates and future notification features
+
+---
+
+## 🤝 Contributing
+
+LangOps is open-source and community-first.  
+If you're passionate about DevOps, LLMs, or smart automation — we’d love your help.
+
+Start here:
+
+```bash
+git clone https://github.com/adirothbuilds/LangOps.git
+cd LangOps
+git switch -c your-new-branch
+make install-dev
+```
+
+Then:
+
+- Follow the [Code of Conduct](CODE_OF_CONDUCT.md)
+- Write meaningful commit messages
+- Cover your code with tests
+- Open a PR when ready 🙌
+
+✨ Tip: Run `make lint && make test` before every PR to verify your changes.
+
+Community contact:
+
+- 📬 Email: [adi.build.balance@gmail.com](mailto:adi.build.balance@gmail.com)
+- 🧵 Discussions: [GitHub Discussions](https://github.com/adirothbuilds/LangOps/discussions/10)
+- 🐞 Issues: [Issue Tracker](https://github.com/adirothbuilds/LangOps/issues)
+
+---
+
+## 🔮 Coming Soon
+
+LangOps is evolving rapidly. Upcoming additions:
+
+- `LangOps.Agent` – Smart agents for pipeline triage, issue explanation, and auto-resolution.
+- `LangOps.Tool` – CLI utilities for fast log inspection and AI-powered summaries.
+- `LangOps.Alert` – Real-time error alerts via custom channels (email, Slack, etc.)
+
+📌 Want to build your own plugin or agent? Open an idea in [GitHub Discussions](https://github.com/adirothbuilds/LangOps/discussions) and let’s talk!
+
+---
+
+## 📄 License
+
+MIT — use it freely, improve it openly, and build responsibly.  
+See [`LICENSE`](LICENSE) for details.
