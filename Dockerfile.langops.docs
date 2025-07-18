@@ -1,0 +1,45 @@
+# Dockerfile for LangOps Documentation
+# This container serves the MkDocs documentation site for LangOps
+
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies including PostgreSQL dev libraries
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    git \
+    libpq-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements for documentation
+COPY requirements.docs.txt .
+
+# Install Python dependencies (all requirements including MkDocs)
+RUN pip install --no-cache-dir -r requirements.docs.txt
+
+# Copy the documentation files
+COPY docs/ docs/
+COPY mkdocs.yml .
+
+# Copy additional files needed for documentation
+COPY README.md .
+COPY LICENSE .
+COPY CODE_OF_CONDUCT.md .
+COPY CHANGELOG.md .
+
+# Set environment variables
+ENV PYTHONPATH=/app
+ENV MKDOCS_CONFIG_FILE=mkdocs.yml
+
+# Expose port 8000 for MkDocs
+EXPOSE 8000
+
+# Create a non-root user for security
+RUN useradd -m -u 1000 docs && chown -R docs:docs /app
+USER docs
+
+# Run MkDocs serve
+CMD ["mkdocs", "serve", "--dev-addr=0.0.0.0:8000"]

@@ -1,0 +1,229 @@
+/* Custom CSS for LangOps Documentation */
+
+:root {
+  --md-primary-fg-color: #1976d2;
+  --md-primary-fg-color--light: #64b5f6;
+  --md-primary-fg-color--dark: #1565c0;
+  --md-accent-fg-color: #00bcd4;
+  --md-accent-fg-color--light: #4dd0e1;
+  --md-accent-fg-color--dark: #0097a7;
+}
+
+/* Custom hero section */
+.hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-button {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  border-radius: 0.5rem;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.hero-button:hover {
+  background: white;
+  color: #667eea;
+}
+
+/* Feature cards */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  background: var(--md-default-bg-color);
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: var(--md-primary-fg-color);
+}
+
+.feature-description {
+  color: var(--md-default-fg-color--light);
+  line-height: 1.6;
+}
+
+/* Code blocks */
+.highlight {
+  margin: 1rem 0;
+}
+
+.highlight pre {
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Coverage badge */
+.coverage-badge {
+  background: #4caf50;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+/* Navigation enhancements */
+.md-tabs__item {
+  font-weight: 500;
+}
+
+.md-nav__link--active {
+  font-weight: 600;
+}
+
+/* Alert boxes */
+.alert {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  border-left: 4px solid;
+}
+
+.alert-info {
+  background: #e3f2fd;
+  border-color: #2196f3;
+  color: #0d47a1;
+}
+
+.alert-success {
+  background: #e8f5e8;
+  border-color: #4caf50;
+  color: #1b5e20;
+}
+
+.alert-warning {
+  background: #fff3e0;
+  border-color: #ff9800;
+  color: #e65100;
+}
+
+.alert-error {
+  background: #ffebee;
+  border-color: #f44336;
+  color: #b71c1c;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Dark mode adjustments */
+[data-md-color-scheme="slate"] .feature-card {
+  background: var(--md-default-bg-color);
+  border-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="slate"] .alert-info {
+  background: rgba(33, 150, 243, 0.1);
+  color: #90caf9;
+}
+
+[data-md-color-scheme="slate"] .alert-success {
+  background: rgba(76, 175, 80, 0.1);
+  color: #a5d6a7;
+}
+
+[data-md-color-scheme="slate"] .alert-warning {
+  background: rgba(255, 152, 0, 0.1);
+  color: #ffcc02;
+}
+
+[data-md-color-scheme="slate"] .alert-error {
+  background: rgba(244, 67, 54, 0.1);
+  color: #ef9a9a;
+}
+
+/* Table styles */
+.md-typeset table:not([class]) {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--md-primary-fg-color);
+  color: white;
+  font-weight: 600;
+}
+
+/* Button styles */
+.md-button {
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.md-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Footer customization */
+.md-footer {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}

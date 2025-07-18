@@ -1,0 +1,156 @@
+site_name: LangOps Documentation
+site_description: Modular AI SDK for DevOps Log Intelligence
+site_author: Adi Roth
+site_url: https://adirothbuilds.github.io/langops
+repo_url: https://github.com/adirothbuilds/langops
+repo_name: adirothbuilds/langops
+edit_uri: edit/main/docs/
+docs_dir: docs
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.ico
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.integrate
+    - toc.follow
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - content.tabs.link
+    - content.action.edit
+    - content.action.view
+
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: google
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: pymdownx.superfences.fence_code_format
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: material.extensions.emoji.twemoji
+      emoji_generator: material.extensions.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - footnotes
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - def_list
+  - pymdownx.arithmatex:
+      generic: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/adirothbuilds/langops
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/langops/
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:adi.build.balance@gmail.com
+  version:
+    provider: mike
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quick-start.md
+  - Core Modules:
+    - Overview: langops/core/index.md
+    - Parser: langops/parser/index.md
+    - LLM: langops/llm/index.md
+    - Prompt: langops/prompt/index.md
+    - Alert: langops/alert/index.md
+  - Parser Deep Dive:
+    - Overview: langops/parser/index.md
+    - Utilities:
+      - Overview: langops/parser/utils/index.md
+      - Extractors: langops/parser/utils/extractors.md
+      - Resolver: langops/parser/utils/resolver.md
+      - Stage Cleaner: langops/parser/utils/stage_cleaner.md
+    - Patterns:
+      - Overview: langops/parser/patterns/index.md
+      - Common Patterns: langops/parser/patterns/common.md
+      - Jenkins: langops/parser/patterns/jenkins.md
+      - GitHub Actions: langops/parser/patterns/github_actions.md
+      - GitLab CI: langops/parser/patterns/gitlab_ci.md
+      - Azure DevOps: langops/parser/patterns/azure_devops.md
+    - Types: langops/parser/types/pipeline_types.md
+    - Constants: langops/parser/constants/pipeline_constants.md
+  - API Reference:
+    - Core Classes: langops/core/index.md
+    - Parser API: langops/parser/index.md
+    - LLM API: langops/llm/index.md
+    - Prompt API: langops/prompt/index.md
+    - Alert API: langops/alert/index.md
+  - Contributing:
+    - Development: contributing/development.md
+    - Testing: contributing/testing.md
+    - Code of Conduct: CODE_OF_CONDUCT.md
+    - License: LICENSE
+  - Changelog: CHANGELOG.md

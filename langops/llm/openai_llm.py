@@ -136,7 +136,7 @@ class OpenAILLM(BaseLLM):
         }
 
     def complete(
-        self, prompt: str | List[ChatCompletionMessageParam], **kwargs
+        self, prompt: str | List[ChatCompletionMessageParam], **kwargs: Any
     ) -> LLMResponse:
         """
         Synchronously generates a completion using OpenAI's API.
@@ -157,7 +157,7 @@ class OpenAILLM(BaseLLM):
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=cast(List[ChatCompletionMessageParam], messages_or_prompt),
-                **kwargs
+                **kwargs,
             )
         else:
             response = self.client.completions.create(
@@ -170,7 +170,7 @@ class OpenAILLM(BaseLLM):
         return LLMResponse(text=str(text or ""), raw=response, metadata=metadata)
 
     async def acomplete(
-        self, prompt: str | List[ChatCompletionMessageParam], **kwargs
+        self, prompt: str | List[ChatCompletionMessageParam], **kwargs: Any
     ) -> LLMResponse:
         """
         Asynchronously generates a completion using OpenAI's API.
@@ -191,7 +191,7 @@ class OpenAILLM(BaseLLM):
             response = await self.async_client.chat.completions.create(
                 model=self.model,
                 messages=cast(List[ChatCompletionMessageParam], messages_or_prompt),
-                **kwargs
+                **kwargs,
             )
         else:
             response = await self.async_client.completions.create(

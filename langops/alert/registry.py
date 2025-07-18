@@ -1,4 +1,4 @@
-from typing import Type, Dict, Optional
+from typing import Type, Dict, Optional, Callable, List
 
 # Alert registry for langops.alert
 
@@ -11,7 +11,7 @@ class AlertRegistry:
     _registry: Dict[str, Type] = {}
 
     @classmethod
-    def register(cls, name: Optional[str] = None):
+    def register(cls, name: Optional[str] = None) -> Callable[[Type], Type]:
         """
         Decorator to register an alert class with an optional name.
 
@@ -22,7 +22,7 @@ class AlertRegistry:
             function: Decorator that registers the alert class.
         """
 
-        def decorator(alert_cls):
+        def decorator(alert_cls: Type) -> Type:
             key = name or alert_cls.__name__
             cls._registry[key] = alert_cls
             return alert_cls
@@ -30,7 +30,7 @@ class AlertRegistry:
         return decorator
 
     @classmethod
-    def get_alert(cls, name: str):
+    def get_alert(cls, name: str) -> Optional[Type]:
         """
         Retrieve an alert class by name.
 
@@ -43,7 +43,7 @@ class AlertRegistry:
         return cls._registry.get(name)
 
     @classmethod
-    def list_alerts(cls):
+    def list_alerts(cls) -> List[str]:
         """
         List all registered alert names.
 

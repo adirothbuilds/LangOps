@@ -36,7 +36,7 @@ class LogEntry(BaseModel):
     message: str
     context_id: Optional[str] = None
 
-    def dict(self, *args, **kwargs):
+    def dict(self, *args: Any, **kwargs: Any) -> Dict[str, Any]:
         """
         Override the Pydantic dict method to ensure JSON serialization compatibility.
         """
@@ -66,7 +66,7 @@ class StageWindow(BaseModel):
     end_line: int
     content: List[LogEntry]
 
-    def dict(self, *args, **kwargs):
+    def dict(self, *args: Any, **kwargs: Any) -> Dict[str, Any]:
         """
         Override the Pydantic dict method to ensure JSON serialization compatibility.
         """
@@ -92,7 +92,7 @@ class ParsedPipelineBundle(BaseModel):
     stages: List[StageWindow]
     metadata: Optional[Dict[str, Any]] = None
 
-    def to_dict(self):
+    def to_dict(self) -> Dict[str, Any]:
         """
         Custom to_dict method to ensure compatibility with BaseParser.to_dict.
         """

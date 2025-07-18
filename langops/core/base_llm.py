@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 from langops.core.types import LLMResponse
 
 
@@ -12,7 +12,7 @@ class BaseLLM(ABC):
     """
 
     @abstractmethod
-    def complete(self, prompt: str, **kwargs) -> LLMResponse:  # pragma: no cover
+    def complete(self, prompt: str, **kwargs: Any) -> LLMResponse:  # pragma: no cover
         """
         Synchronously generate a completion for the given prompt.
 
@@ -25,7 +25,9 @@ class BaseLLM(ABC):
         """
         pass
 
-    async def acomplete(self, prompt: str, **kwargs) -> LLMResponse:  # pragma: no cover
+    async def acomplete(
+        self, prompt: str, **kwargs: Any
+    ) -> LLMResponse:  # pragma: no cover
         """
         Asynchronously generate a completion for the given prompt.
 

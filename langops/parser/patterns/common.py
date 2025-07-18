@@ -1,8 +1,9 @@
 import re
 from langops.parser.types.pipeline_types import SeverityLevel
+from typing import Pattern
 
 
-def _p(pattern: str, flags=re.IGNORECASE):
+def _p(pattern: str, flags: int = re.IGNORECASE) -> Pattern[str]:
     return re.compile(pattern, flags)
 
 

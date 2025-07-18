@@ -31,8 +31,11 @@ class PipelineParser(BaseParser):
     stage_patterns: List[re.Pattern]
 
     def __init__(
-        self, source: Optional[str] = None, config_file: Optional[str] = None, **kwargs
-    ):
+        self,
+        source: Optional[str] = None,
+        config_file: Optional[str] = None,
+        **kwargs: Any,
+    ) -> None:
         self.source = source or "unknown"
         self.patterns = {}
         self.stage_patterns = []

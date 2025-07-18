@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import json
 import warnings
 from datetime import datetime
+from typing import Any, List, Optional, Dict
 
 
 class BaseParser(ABC):
@@ -12,7 +13,7 @@ class BaseParser(ABC):
     """
 
     @abstractmethod
-    def parse(self, data):  # pragma: no cover
+    def parse(self, data: Any) -> Any:  # pragma: no cover
         """
         Parse the input data and return the result.
 
@@ -25,7 +26,7 @@ class BaseParser(ABC):
         pass
 
     @staticmethod
-    def handle_log_file(log_file_path):
+    def handle_log_file(log_file_path: str) -> str:
         """
         Reads and returns the content of the log file.
 
@@ -39,7 +40,13 @@ class BaseParser(ABC):
             return f.read()
 
     @staticmethod
-    def filter_log_lines(log_content, keyword=None, level=None, pattern=None, flags=0):
+    def filter_log_lines(
+        log_content: str,
+        keyword: Optional[str] = None,
+        level: Optional[str] = None,
+        pattern: Optional[str] = None,
+        flags: int = 0,
+    ) -> List[str]:
         """
         Filter log lines by keyword, log level, or regex pattern.
 
@@ -73,7 +80,7 @@ class BaseParser(ABC):
         return filtered
 
     @classmethod
-    def validate_input(cls, data):
+    def validate_input(cls, data: Any) -> bool:
         """
         Validate input data. Override for custom validation in subclasses.
 
@@ -93,7 +100,7 @@ class BaseParser(ABC):
         return True
 
     @classmethod
-    def from_file(cls, file_path, *args, **kwargs):
+    def from_file(cls, file_path: str, *args: Any, **kwargs: Any) -> Any:
         """
         Parse data directly from a file path. Must be called from a concrete subclass.
 
@@ -116,7 +123,7 @@ class BaseParser(ABC):
         return cls(*args, **kwargs).parse(data)
 
     @classmethod
-    def to_dict(cls, parsed_result):
+    def to_dict(cls, parsed_result: Any) -> Dict[str, Any]:
         """
         Convert parsed result to a dictionary if possible. Override for custom serialization.
 
@@ -130,15 +137,17 @@ class BaseParser(ABC):
             dict: Dictionary representation of the parsed result.
         """
         if hasattr(parsed_result, "to_dict"):
-            return parsed_result.to_dict()
+            result = parsed_result.to_dict()
+            return result if isinstance(result, dict) else {}
         if isinstance(parsed_result, dict):
             return parsed_result
         if hasattr(parsed_result, "__dict__"):
-            return vars(parsed_result)
+            result = vars(parsed_result)
+            return result if isinstance(result, dict) else {}
         raise TypeError("Parsed result cannot be converted to dict.")
 
     @classmethod
-    def to_json(cls, parsed_result):
+    def to_json(cls, parsed_result: Any) -> str:
         """
         Convert parsed result to a JSON string. Override for custom serialization.
 

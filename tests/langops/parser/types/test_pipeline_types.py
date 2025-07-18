@@ -1,4 +1,5 @@
-import pytest
+import unittest
+from datetime import datetime
 from langops.parser.types.pipeline_types import (
     SeverityLevel,
     LogEntry,
@@ -7,70 +8,96 @@ from langops.parser.types.pipeline_types import (
 )
 
 
-def test_severity_level_enum():
-    """Test the SeverityLevel enum values."""
-    assert SeverityLevel.INFO.value == "info"
-    assert SeverityLevel.WARNING.value == "warning"
-    assert SeverityLevel.ERROR.value == "error"
-    assert SeverityLevel.CRITICAL.value == "critical"
+class TestPipelineTypes(unittest.TestCase):
+
+    def test_severity_level_enum(self):
+        self.assertEqual(SeverityLevel.INFO.value, "info")
+        self.assertEqual(SeverityLevel.WARNING.value, "warning")
+        self.assertEqual(SeverityLevel.ERROR.value, "error")
+        self.assertEqual(SeverityLevel.CRITICAL.value, "critical")
+
+    def test_log_entry(self):
+        timestamp = datetime.now()
+        log_entry = LogEntry(
+            timestamp=timestamp,
+            language="Python",
+            severity=SeverityLevel.ERROR,
+            line=42,
+            message="An error occurred",
+            context_id="stage-1",
+        )
+
+        self.assertEqual(log_entry.timestamp, timestamp)
+        self.assertEqual(log_entry.language, "Python")
+        self.assertEqual(log_entry.severity, SeverityLevel.ERROR)
+        self.assertEqual(log_entry.line, 42)
+        self.assertEqual(log_entry.message, "An error occurred")
+        self.assertEqual(log_entry.context_id, "stage-1")
+        self.assertEqual(
+            log_entry.dict(),
+            {
+                "timestamp": timestamp.isoformat(),
+                "language": "Python",
+                "severity": "error",
+                "line": 42,
+                "message": "An error occurred",
+                "context_id": "stage-1",
+            },
+        )
+
+    def test_stage_window(self):
+        log_entry = LogEntry(
+            timestamp=None,
+            language="Python",
+            severity=SeverityLevel.WARNING,
+            line=10,
+            message="A warning",
+            context_id=None,
+        )
+        stage_window = StageWindow(
+            name="Build Stage", start_line=1, end_line=20, content=[log_entry]
+        )
+
+        self.assertEqual(stage_window.name, "Build Stage")
+        self.assertEqual(stage_window.start_line, 1)
+        self.assertEqual(stage_window.end_line, 20)
+        self.assertEqual(len(stage_window.content), 1)
+        self.assertEqual(stage_window.content[0], log_entry)
+        self.assertEqual(
+            stage_window.dict(),
+            {
+                "name": "Build Stage",
+                "start_line": 1,
+                "end_line": 20,
+                "content": [log_entry.dict()],
+            },
+        )
+
+    def test_parsed_pipeline_bundle(self):
+        stage_window = StageWindow(
+            name="Test Stage", start_line=1, end_line=10, content=[]
+        )
+        parsed_bundle = ParsedPipelineBundle(
+            source="jenkins",
+            stages=[stage_window],
+            metadata={"duration": "5m", "status": "success"},
+        )
+
+        self.assertEqual(parsed_bundle.source, "jenkins")
+        self.assertEqual(len(parsed_bundle.stages), 1)
+        self.assertEqual(parsed_bundle.stages[0], stage_window)
+        self.assertEqual(
+            parsed_bundle.metadata, {"duration": "5m", "status": "success"}
+        )
+        self.assertEqual(
+            parsed_bundle.to_dict(),
+            {
+                "source": "jenkins",
+                "stages": [stage_window.dict()],
+                "metadata": {"duration": "5m", "status": "success"},
+            },
+        )
 
 
-def test_log_entry_dict():
-    """Test the dict method of LogEntry."""
-    entry = LogEntry(
-        timestamp=None,
-        language="python",
-        severity=SeverityLevel.INFO,
-        line=42,
-        message="This is a log message.",
-        context_id="12345",
-    )
-    expected_dict = {
-        "timestamp": None,
-        "language": "python",
-        "severity": "info",
-        "line": 42,
-        "message": "This is a log message.",
-        "context_id": "12345",
-    }
-    assert entry.dict() == expected_dict
-
-
-def test_stage_window_dict():
-    """Test the dict method of StageWindow."""
-    entry = LogEntry(
-        timestamp=None,
-        language="python",
-        severity=SeverityLevel.INFO,
-        line=42,
-        message="This is a log message.",
-        context_id="12345",
-    )
-    stage = StageWindow(name="Build Stage", start_line=1, end_line=100, content=[entry])
-    expected_dict = {
-        "name": "Build Stage",
-        "start_line": 1,
-        "end_line": 100,
-        "content": [entry.dict()],
-    }
-    assert stage.dict() == expected_dict
-
-
-def test_parsed_pipeline_bundle_model_dump():
-    """Test the model_dump method of ParsedPipelineBundle."""
-    entry = LogEntry(
-        timestamp=None,
-        language="python",
-        severity=SeverityLevel.INFO,
-        line=42,
-        message="This is a log message.",
-        context_id="12345",
-    )
-    stage = StageWindow(name="Build Stage", start_line=1, end_line=100, content=[entry])
-    bundle = ParsedPipelineBundle(stages=[stage], source="jenkins", metadata=None)
-    expected_dict = {
-        "stages": [stage.model_dump()],
-        "source": "jenkins",
-        "metadata": None,
-    }
-    assert bundle.model_dump() == expected_dict
+if __name__ == "__main__":
+    unittest.main()

@@ -1,6 +1,7 @@
 from langops.core.base_prompt import BasePrompt
 from langops.core.types import PromptRole
 from langops.prompt.registry import PromptRegistry
+from typing import List, Any
 
 
 @PromptRegistry.register(name="JenkinsErrorPrompt")
@@ -9,7 +10,7 @@ class JenkinsErrorPrompt(BasePrompt):
     Subclass of BasePrompt to handle error logs from Jenkins builds.
     """
 
-    def __init__(self, build_id: str, timestamp: str, **kwargs):
+    def __init__(self, build_id: str, timestamp: str, **kwargs: Any) -> None:
         """
         Initialize the JenkinsErrorPrompt instance with a system prompt.
 
@@ -25,7 +26,7 @@ class JenkinsErrorPrompt(BasePrompt):
             variables={"build_id": build_id, "timestamp": timestamp},
         )
 
-    def add_user_prompt(self, error_logs: list):
+    def add_user_prompt(self, error_logs: List[str]) -> None:
         """
         Add a user prompt with error logs.
 

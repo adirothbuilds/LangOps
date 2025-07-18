@@ -60,65 +60,15 @@ def extract_context_id(
     Returns:
         Optional[str]: The extracted context ID or None if not found.
     """
-
-    def match_patterns(line: str) -> Optional[str]:
-        """
-        Matches the line against predefined patterns to extract context ID.
-
-        Args:
-            line (str): The line to match against patterns.
-
-        Returns:
-            Optional[str]: The matched context ID or None if no match is found.
-        """
-        for pattern in context_id_patterns:
-            match = pattern.search(line)
-            if match:
-                value = match.group(1).strip()
-                if (
-                    len(value) >= 6
-                    and not re.fullmatch(r"[a-z]{1,3}", value)
-                    and not any(c in value for c in ["'", '"', "(", ")"])
-                ):
-                    return value
-        return None
-
-    def collect_context_lines(lines: List[str], start: int, end: int) -> List[str]:
-        """
-        Collects context lines that contain specific keywords.
-
-        Args:
-            lines (List[str]): The list of log lines.
-            start (int): The starting index for the context window.
-            end (int): The ending index for the context window.
-
-        Returns:
-            List[str]: A list of context lines containing the specified keywords.
-        """
-        return [
-            line.strip()
-            for line in lines[start:end]
-            if any(kw in line.lower() for kw in keywords)
-            and not re.match(r"^\[\d{4}-\d{2}-\d{2}", line)
-        ]
-
-    context_id_patterns = [
-        re.compile(r"\b([a-fA-F0-9]{8,}[-:]?[a-fA-F0-9]{4,})\b"),
-        re.compile(r"\bcontext[-_]?id[:=\s]?([a-zA-Z0-9-]{6,})\b", re.IGNORECASE),
-        re.compile(r"\btrace[-_]?id[:=\s]?([a-zA-Z0-9-]{6,})\b", re.IGNORECASE),
-        re.compile(r"\bFAIL\b\s+(src/[a-zA-Z0-9_/.-]+)", re.IGNORECASE),
-        re.compile(r"\b(?:Exception|Error)[:=\s]+([a-zA-Z0-9_.-]+)", re.IGNORECASE),
-    ]
-
     keywords = ["fail", "error", "exception", "trace", "context"]
 
     start = max(0, line_number - window - 1)
     end = min(len(lines), line_number + window)
 
     matches = [
-        (i, match_patterns(lines[i].strip()))
+        (i, _match_patterns(lines[i].strip()))
         for i in range(start, end)
-        if match_patterns(lines[i].strip())
+        if _match_patterns(lines[i].strip())
     ]
 
     if matches:
@@ -126,11 +76,67 @@ def extract_context_id(
             matches, key=lambda x: (abs(x[0] - line_number), -len(x[1] or ""))
         )[0][1]
 
-    context_lines = collect_context_lines(lines, start, end)
+    context_lines = _collect_context_lines(lines, start, end, keywords)
     if context_lines:
         return " | ".join(context_lines[:3])
 
     return None
+
+
+def _match_patterns(line: str) -> Optional[str]:
+    """
+    Matches the line against predefined patterns to extract context ID.
+
+    Args:
+        line (str): The line to match against patterns.
+
+    Returns:
+        Optional[str]: The matched context ID or None if no match is found.
+    """
+    context_id_patterns = [
+        re.compile(r"\b([a-fA-F0-9]{8,}[-:]?[a-fA-F0-9]{4,})\b"),
+        re.compile(r"\bcontext[-_]?id[:=\s]?([a-zA-Z0-9-]{6,})\b", re.IGNORECASE),
+        re.compile(r"\btrace[-_]?id[:=\s]?([a-zA-Z0-9-]{6,})\b", re.IGNORECASE),
+        re.compile(r"\bFAIL\b\s+(src/[a-zA-Z0-9_/.-]+)", re.IGNORECASE),
+        re.compile(r"\b(?:Exception|Error)[:=\s]+([a-zA-Z0-9_.-]+)", re.IGNORECASE),
+        re.compile(r"\bjob[-_]?id[:=\s]?([a-zA-Z0-9-]{6,})\b", re.IGNORECASE),
+        re.compile(r"\bbuild[-_]?id[:=\s]?([a-zA-Z0-9-]{6,})\b", re.IGNORECASE),
+    ]
+
+    for pattern in context_id_patterns:
+        match = pattern.search(line)
+        if match:
+            value = match.group(1).strip()
+            if (
+                len(value) >= 6
+                and not re.fullmatch(r"[a-z]{1,3}", value)
+                and not any(c in value for c in ["'", '"', "(", ")"])
+            ):
+                return value
+    return None
+
+
+def _collect_context_lines(
+    lines: List[str], start: int, end: int, keywords: List[str]
+) -> List[str]:
+    """
+    Collects context lines that contain specific keywords.
+
+    Args:
+        lines (List[str]): The list of log lines.
+        start (int): The starting index for the context window.
+        end (int): The ending index for the context window.
+        keywords (List[str]): The keywords to search for.
+
+    Returns:
+        List[str]: A list of context lines containing the specified keywords.
+    """
+    return [
+        line.strip()
+        for line in lines[start:end]
+        if any(kw in line.lower() for kw in keywords)
+        and not re.match(r"^\[\d{4}-\d{2}-\d{2}", line)
+    ]
 
 
 def extract_metadata(data: str, source: Optional[str] = None) -> Dict[str, Any]:

@@ -22,7 +22,7 @@ class JenkinsParser(BaseParser):
     provides comprehensive log analysis with deduplication capabilities.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.patterns = (
             jenkins_patterns.GROOVY_PATTERNS
             + jenkins_patterns.JAVA_PATTERNS
