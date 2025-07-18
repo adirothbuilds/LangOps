@@ -13,8 +13,8 @@ class TestJenkinsParser:
     def test_init(self):
         """Test JenkinsParser initialization."""
         assert self.parser is not None
-        assert hasattr(self.parser, 'patterns')
-        assert hasattr(self.parser, 'stage_patterns')
+        assert hasattr(self.parser, "patterns")
+        assert hasattr(self.parser, "stage_patterns")
         assert len(self.parser.patterns) > 0
         assert len(self.parser.stage_patterns) > 0
 
@@ -43,7 +43,7 @@ class TestJenkinsParser:
         """Test parsing simple log with error severity."""
         log_data = "ERROR: Build failed due to compilation error"
         result = self.parser.parse(log_data)
-        
+
         assert len(result.stages) == 1
         assert result.stages[0].name == "Unknown"
         assert len(result.stages[0].logs) == 1
@@ -59,7 +59,7 @@ ERROR: Compilation failed
 line too long
 """
         result = self.parser.parse(log_data)
-        
+
         assert len(result.stages) == 2
         stage_names = [stage.name for stage in result.stages]
         assert "Git" in stage_names
@@ -77,7 +77,7 @@ CRITICAL: OutOfMemoryError
         result = self.parser.parse(log_data, min_severity=SeverityLevel.WARNING)
         assert len(result.stages) == 1
         assert len(result.stages[0].logs) == 3  # WARNING, ERROR, CRITICAL
-        
+
         # Test with ERROR minimum severity
         result = self.parser.parse(log_data, min_severity=SeverityLevel.ERROR)
         assert len(result.stages[0].logs) == 2  # ERROR, CRITICAL
@@ -109,7 +109,7 @@ WARNING: line too long
         # Test [StageType] pattern
         stage = self.parser._detect_stage("[Git] Cloning repository")
         assert stage == "Git"
-        
+
         # Test [Pipeline] pattern - returns "Pipeline" for most pipeline logs
         stage = self.parser._detect_stage("[Pipeline] sh")
         assert stage == "Pipeline"
@@ -119,9 +119,9 @@ WARNING: line too long
         # Test [StageType] pattern
         stage = self.parser._detect_stage("[Maven] Building application")
         assert stage == "Maven"
-        
+
         # Test Stage pattern with quotes
-        stage = self.parser._detect_stage("Stage \"Build Application\"")
+        stage = self.parser._detect_stage('Stage "Build Application"')
         assert stage == "Build Application"
 
     def test_detect_stage_invalid_names(self):
@@ -129,7 +129,7 @@ WARNING: line too long
         # Test short names - based on actual implementation
         stage = self.parser._detect_stage("[x] short")
         assert stage is None
-        
+
         # Test blacklisted names
         stage = self.parser._detect_stage("[sh] command")
         assert stage is None
@@ -148,7 +148,7 @@ WARNING: line too long
         """Test severity classification for error patterns."""
         severity = self.parser._classify_severity("ERROR: Build failed")
         assert severity == SeverityLevel.ERROR
-        
+
         severity = self.parser._classify_severity("java.lang.OutOfMemoryError")
         assert severity == SeverityLevel.CRITICAL
 
@@ -156,7 +156,7 @@ WARNING: line too long
         """Test severity classification for warning patterns."""
         severity = self.parser._classify_severity("line too long")
         assert severity == SeverityLevel.WARNING
-        
+
         severity = self.parser._classify_severity("marked build as UNSTABLE")
         assert severity == SeverityLevel.WARNING
 
@@ -169,12 +169,16 @@ WARNING: line too long
         """Test severity level comparison."""
         # Test same level
         assert self.parser._is_severity_enough(SeverityLevel.ERROR, SeverityLevel.ERROR)
-        
+
         # Test higher level
-        assert self.parser._is_severity_enough(SeverityLevel.CRITICAL, SeverityLevel.ERROR)
-        
+        assert self.parser._is_severity_enough(
+            SeverityLevel.CRITICAL, SeverityLevel.ERROR
+        )
+
         # Test lower level
-        assert not self.parser._is_severity_enough(SeverityLevel.WARNING, SeverityLevel.ERROR)
+        assert not self.parser._is_severity_enough(
+            SeverityLevel.WARNING, SeverityLevel.ERROR
+        )
 
     def test_extract_timestamp_iso_format(self):
         """Test timestamp extraction with ISO format."""
@@ -214,12 +218,14 @@ WARNING: line too long
         """Test stages summary with actual data."""
         log_entries = [
             LogEntry(timestamp=None, message="Error 1", severity=SeverityLevel.ERROR),
-            LogEntry(timestamp=None, message="Warning 1", severity=SeverityLevel.WARNING),
+            LogEntry(
+                timestamp=None, message="Warning 1", severity=SeverityLevel.WARNING
+            ),
             LogEntry(timestamp=None, message="Error 2", severity=SeverityLevel.ERROR),
         ]
         stage = StageLogs(name="Build", logs=log_entries)
         parsed_data = ParsedLogBundle(stages=[stage])
-        
+
         summary = self.parser.get_stages_summary(parsed_data)
         assert "Build" in summary
         assert summary["Build"]["error"] == 2
@@ -242,15 +248,15 @@ ERROR: Test suite failed
 java.lang.OutOfMemoryError detected
 """
         result = self.parser.parse(complex_log, min_severity=SeverityLevel.INFO)
-        
+
         # Should have 4 stages: Unknown, Git, Maven, Testing
         assert len(result.stages) == 4
         stage_names = [stage.name for stage in result.stages]
-        assert "Unknown" in stage_names  # "Started by user admin" 
+        assert "Unknown" in stage_names  # "Started by user admin"
         assert "Git" in stage_names
-        assert "Maven" in stage_names 
+        assert "Maven" in stage_names
         assert "Testing" in stage_names
-        
+
         # Check Maven stage has warning and error
         maven_stage = next(stage for stage in result.stages if stage.name == "Maven")
         severities = [log.severity for log in maven_stage.logs]
@@ -265,7 +271,7 @@ java.lang.OutOfMemoryError detected
 ERROR: Something went wrong
 """
         result = self.parser.parse(log_data)
-        
+
         # Should only have one stage (the one with logs)
         assert len(result.stages) == 1
         assert result.stages[0].name == "StageWithLogs"
@@ -274,7 +280,7 @@ ERROR: Something went wrong
         """Test that parsing preserves the original line content."""
         log_data = "ERROR: This is the complete error message with details"
         result = self.parser.parse(log_data)
-        
+
         assert len(result.stages) == 1
         assert len(result.stages[0].logs) == 1
         assert result.stages[0].logs[0].message == log_data
@@ -284,11 +290,11 @@ ERROR: Something went wrong
         # Test empty stage name
         stage = self.parser._detect_stage("[] empty name")
         assert stage is None
-        
+
         # Test stage with only whitespace
         stage = self.parser._detect_stage("[   ] whitespace only")
         assert stage is None
-        
+
         # Test stage with valid name
         stage = self.parser._detect_stage("[Build] Starting build process")
         assert stage == "Build"

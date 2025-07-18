@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 import json
+import warnings
+from datetime import datetime
 
 
 class BaseParser(ABC):
@@ -51,6 +53,11 @@ class BaseParser(ABC):
         Returns:
             list: Filtered log lines.
         """
+        warnings.warn(
+            "filter_log_lines is deprecated and will be removed in a future version.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         import re
 
         lines = log_content.splitlines()
@@ -80,7 +87,9 @@ class BaseParser(ABC):
             bool: True if valid.
         """
         if data is None or not isinstance(data, str):
-            raise ValueError("Input data must be a non-empty string.")
+            raise ValueError("Input data must be a string.")
+        if not data.strip():
+            return False  # Consider empty or whitespace-only strings as invalid but do not raise an exception
         return True
 
     @classmethod
@@ -149,6 +158,14 @@ class BaseParser(ABC):
             )
         try:
             dict_result = cls.to_dict(parsed_result)
-            return json.dumps(dict_result, indent=2, ensure_ascii=False, sort_keys=True)
+            return json.dumps(
+                dict_result,
+                indent=2,
+                ensure_ascii=False,
+                sort_keys=True,
+                default=lambda obj: (
+                    obj.isoformat() if isinstance(obj, datetime) else str(obj)
+                ),
+            )
         except TypeError as e:
             raise ValueError(f"Failed to convert to JSON: {e}")

@@ -197,9 +197,9 @@ class JenkinsParser(BaseParser):
 
         format_strings = [
             "%Y-%m-%dT%H:%M:%S.%f",  # ISO format with milliseconds
-            "%Y-%m-%dT%H:%M:%S",     # ISO format without milliseconds
-            "%b %d %Y %H:%M:%S",     # Mon DD YYYY HH:MM:SS
-            "%m/%d/%Y %H:%M:%S",     # MM/DD/YYYY HH:MM:SS
+            "%Y-%m-%dT%H:%M:%S",  # ISO format without milliseconds
+            "%b %d %Y %H:%M:%S",  # Mon DD YYYY HH:MM:SS
+            "%m/%d/%Y %H:%M:%S",  # MM/DD/YYYY HH:MM:SS
         ]
 
         for pattern in timestamp_patterns:
