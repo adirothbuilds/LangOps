@@ -87,7 +87,7 @@ jobs:
           echo "Coverage file content:"
           cat coverage.xml || echo "Coverage file is empty or does not exist"
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarqube-scan-action@v5
         with:
           args: >
             -Dsonar.projectKey=adirothbuilds_AgentOps
