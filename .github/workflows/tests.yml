@@ -52,7 +52,7 @@ jobs:
 
       - name: Patch coverage for Sonar
         run: |
-          sed -i 's|<source>.*</source>|<source>langops</source>|' coverage.xml
+          sed -i 's|<source>.*</source>|<source>.</source>|' coverage.xml
 
       - name: Upload coverage
         uses: actions/upload-artifact@v4
@@ -84,7 +84,7 @@ jobs:
             -Dsonar.organization=adirothbuilds
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.sources=.
-            -Dsonar.exclusions=**/tests/**,**/demo/**
+            -Dsonar.exclusions=**/tests/**,**/demo/**,**/docs/**,docker-compose.docs.yml,Dockerfile.langops.docs,mkdocs.yml
             -Dsonar.python.version=3.11
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
