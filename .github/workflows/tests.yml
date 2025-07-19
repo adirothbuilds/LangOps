@@ -53,9 +53,7 @@ jobs:
       - name: Patch coverage for Sonar
         run: |
           echo "Patching coverage.xml for Sonar"
-          sed -i 's|<source>.*</source>|<source>./</source>|' coverage.xml
-          # Add 'langops/' prefix to every <filename>...</filename> entry in coverage.xml
-          sed -i -E '/<filename>(?!langops\/)/ s|<filename>([^<]+)</filename>|<filename>langops/\1</filename>|' coverage.xml
+          sed -i 's|<source>.*</source>|<source>langops</source>|' coverage.xml
 
       - name: Upload coverage
         uses: actions/upload-artifact@v4
@@ -101,5 +99,6 @@ jobs:
             -Dsonar.tests=tests
             -Dsonar.exclusions=**/tests/**,**/demo/**,**/docs/**,docker-compose.docs.yml,Dockerfile.langops.docs,mkdocs.yml
             -Dsonar.python.version=3.11
+            -Dsonar.coverage.exclusions=**/tests/**,**/demo/**,**/docs/**
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

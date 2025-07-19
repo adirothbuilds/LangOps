@@ -80,4 +80,35 @@ extend-exclude = '''
 testpaths = ["tests"]
 python_files = ["test_*.py", "*_test.py"]
 python_functions = ["test_*"]
-addopts = "--cov=langops --cov-report=html --cov-report=xml --cov-report=term-missing"
+addopts = "--cov=langops --cov-report=html --cov-report=xml --cov-report=term-missing --cov-branch"
+
+[tool.coverage.run]
+source = ["langops"]
+branch = true
+omit = [
+    "tests/*",
+    "demo/*",
+    "docs/*",
+    "*/__pycache__/*",
+    "*/migrations/*",
+    "*/venv/*",
+    "*/.venv/*"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+show_missing = true
+
+[tool.coverage.xml]
+output = "coverage.xml"
