@@ -31,3 +31,4 @@ mkdocs-material==9.5.47
 mkdocs-minify-plugin==0.8.0
 mkdocstrings==0.26.2
 mkdocstrings-python==1.12.2
+pymdown-extensions>=10.0
