@@ -1,4 +1,4 @@
-from typing import Type, Dict, Optional
+from typing import Type, Dict, Optional, Callable, List
 
 # Parser registry for langops.parser
 
@@ -11,7 +11,7 @@ class ParserRegistry:
     _registry: Dict[str, Type] = {}
 
     @classmethod
-    def register(cls, name: Optional[str] = None):
+    def register(cls, name: Optional[str] = None) -> Callable[[Type], Type]:
         """
         Decorator to register a parser class with an optional name.
 
@@ -22,7 +22,7 @@ class ParserRegistry:
             function: Decorator that registers the parser class.
         """
 
-        def decorator(parser_cls):
+        def decorator(parser_cls: Type) -> Type:
             key = name or parser_cls.__name__
             cls._registry[key] = parser_cls
             return parser_cls
@@ -30,7 +30,7 @@ class ParserRegistry:
         return decorator
 
     @classmethod
-    def get_parser(cls, name: str):
+    def get_parser(cls, name: str) -> Optional[Type]:
         """
         Retrieve a parser class by name.
 
@@ -43,7 +43,7 @@ class ParserRegistry:
         return cls._registry.get(name)
 
     @classmethod
-    def list_parsers(cls):
+    def list_parsers(cls) -> List[str]:
         """
         List all registered parser names.
 

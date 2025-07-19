@@ -1,4 +1,4 @@
-from typing import Type, Dict, Optional
+from typing import Type, Dict, Optional, Callable, List
 
 # Prompt registry for langops.prompt
 
@@ -11,7 +11,7 @@ class PromptRegistry:
     _registry: Dict[str, Type] = {}
 
     @classmethod
-    def register(cls, name: Optional[str] = None):
+    def register(cls, name: Optional[str] = None) -> Callable[[Type], Type]:
         """
         Decorator to register a prompt class with an optional name.
 
@@ -22,7 +22,7 @@ class PromptRegistry:
             function: Decorator that registers the prompt class.
         """
 
-        def decorator(prompt_cls):
+        def decorator(prompt_cls: Type) -> Type:
             key = name or prompt_cls.__name__
             cls._registry[key] = prompt_cls
             return prompt_cls
@@ -30,7 +30,7 @@ class PromptRegistry:
         return decorator
 
     @classmethod
-    def get_prompt(cls, name: str):
+    def get_prompt(cls, name: str) -> Optional[Type]:
         """
         Retrieve a prompt class by name.
 
@@ -43,7 +43,7 @@ class PromptRegistry:
         return cls._registry.get(name)
 
     @classmethod
-    def list_prompts(cls):
+    def list_prompts(cls) -> List[str]:
         """
         List all registered prompt names.
 

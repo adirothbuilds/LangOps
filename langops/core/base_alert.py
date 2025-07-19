@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any, Dict
 
 
 class BaseAlert(ABC):
@@ -9,7 +10,7 @@ class BaseAlert(ABC):
     """
 
     @abstractmethod
-    def format_alert(self, data):  # pragma: no cover
+    def format_alert(self, data: Any) -> Any:  # pragma: no cover
         """
         Format the input data into the structure required for the alert.
 
@@ -22,7 +23,7 @@ class BaseAlert(ABC):
         pass
 
     @abstractmethod
-    def send_alert(self, formatted_data):  # pragma: no cover
+    def send_alert(self, formatted_data: Any) -> None:  # pragma: no cover
         """
         Send the alert using the formatted data.
 
@@ -35,7 +36,7 @@ class BaseAlert(ABC):
         pass
 
     @classmethod
-    def validate_input(cls, data):
+    def validate_input(cls, data: Any) -> bool:
         """
         Validate input data. Override for custom validation in subclasses.
 
@@ -53,7 +54,7 @@ class BaseAlert(ABC):
         return True
 
     @classmethod
-    def from_data(cls, data, *args, **kwargs):
+    def from_data(cls, data: Dict[str, Any], *args: Any, **kwargs: Any) -> Any:
         """
         Process data directly and send an alert. Must be called from a concrete subclass.
 

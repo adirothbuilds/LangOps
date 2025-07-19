@@ -1,12 +1,13 @@
 from langops.core.base_parser import BaseParser
 from langops.parser.registry import ParserRegistry
+from typing import List, Dict, Any
 
 
 @ParserRegistry.register(name="ErrorParser")
 class ErrorParser(BaseParser):
     """Parser that filters and returns only error logs from the input data."""
 
-    def parse(self, data):
+    def parse(self, data: str) -> List[str]:
         """Parse the input data and return only error log lines.
 
         Args:
@@ -28,7 +29,7 @@ class ErrorParser(BaseParser):
         return error_lines
 
     @classmethod
-    def to_dict(cls, parsed_result):
+    def to_dict(cls, parsed_result: List[str]) -> Dict[str, Any]:
         """Convert the list of error log lines to a dictionary.
 
         Args:

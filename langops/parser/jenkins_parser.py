@@ -22,7 +22,7 @@ class JenkinsParser(BaseParser):
     provides comprehensive log analysis with deduplication capabilities.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.patterns = (
             jenkins_patterns.GROOVY_PATTERNS
             + jenkins_patterns.JAVA_PATTERNS
@@ -197,9 +197,9 @@ class JenkinsParser(BaseParser):
 
         format_strings = [
             "%Y-%m-%dT%H:%M:%S.%f",  # ISO format with milliseconds
-            "%Y-%m-%dT%H:%M:%S",     # ISO format without milliseconds
-            "%b %d %Y %H:%M:%S",     # Mon DD YYYY HH:MM:SS
-            "%m/%d/%Y %H:%M:%S",     # MM/DD/YYYY HH:MM:SS
+            "%Y-%m-%dT%H:%M:%S",  # ISO format without milliseconds
+            "%b %d %Y %H:%M:%S",  # Mon DD YYYY HH:MM:SS
+            "%m/%d/%Y %H:%M:%S",  # MM/DD/YYYY HH:MM:SS
         ]
 
         for pattern in timestamp_patterns:

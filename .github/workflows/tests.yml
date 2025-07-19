@@ -52,6 +52,7 @@ jobs:
 
       - name: Patch coverage for Sonar
         run: |
+          echo "Patching coverage.xml for Sonar"
           sed -i 's|<source>.*</source>|<source>langops</source>|' coverage.xml
 
       - name: Upload coverage
@@ -75,16 +76,29 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: coverage-for-sonar
-
+      
+      - name: Show path and coverage file
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Files in current directory:"
+          ls -la
+          echo "Coverage file path: $(find . -name 'coverage.xml')"
+          echo "Coverage file exists: $(test -f coverage.xml && echo 'Yes' || echo 'No')"
+          echo "Coverage file content:"
+          head coverage.xml -n 80 || echo "Coverage file is empty or does not exist"
+          echo "init files in the project:"
+          find . -name '__init__.py'
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
+        uses: SonarSource/sonarqube-scan-action@v5
         with:
           args: >
             -Dsonar.projectKey=adirothbuilds_AgentOps
             -Dsonar.organization=adirothbuilds
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.sources=.
-            -Dsonar.exclusions=**/tests/**,**/demo/**
+            -Dsonar.tests=tests
+            -Dsonar.exclusions=**/tests/**,**/demo/**,**/docs/**,docker-compose.docs.yml,Dockerfile.langops.docs,mkdocs.yml
             -Dsonar.python.version=3.11
+            -Dsonar.coverage.exclusions=**/tests/**,**/demo/**,**/docs/**
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

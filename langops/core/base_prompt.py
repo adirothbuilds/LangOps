@@ -18,7 +18,7 @@ class BasePrompt(BaseModel, ABC):
 
     def add_prompt(
         self, role: PromptRole, template: str, variables: Dict[str, Any] = {}
-    ):
+    ) -> None:
         """
         Add a new prompt message to the list.
 
@@ -46,7 +46,7 @@ class BasePrompt(BaseModel, ABC):
             for prompt in self.prompts
         ]
 
-    def clear_prompts(self):
+    def clear_prompts(self) -> None:
         """
         Clear all prompt messages.
         """

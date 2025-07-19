@@ -7,16 +7,17 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/adirothbuilds/langops"
 repository = "https://github.com/adirothbuilds/langops"
-documentation = "https://github.com/adirothbuilds/langops#readme"
+documentation = "https://github.com/adirothbuilds/langops/tree/main/docs"
 packages = [
     { include = "langops" }
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.9"
+python = ">=3.10"
 openai = "^1.0.0"
 python-dotenv = "^1.0.0"
-coverage = "^7.0.0"
+pyyaml = "^6.0.2"
+pydantic = "^2.0.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0.0"
@@ -25,10 +26,89 @@ mypy = "^1.0.0"
 pytest-cov = "^4.0.0"
 pytest-asyncio = "^0.21.0"
 colorama = "^0.4.6"
+types-pyyaml = "^6.0.12.20250516"
+coverage = "^7.0.0"
+flake8 = "^7.0.0"
+
+[tool.poetry.group.docs.dependencies]
+mkdocs = "^1.5.0"
+mkdocs-material = "^9.5.0"
+mkdocstrings = {extras = ["python"], version = "^0.25.0"}
+pymdown-extensions = "^10.7.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
 [tool.mypy-langops.llm.openai_llm]
 ignore_errors = true
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_functions = ["test_*"]
+addopts = "--cov=langops --cov-report=html --cov-report=xml --cov-report=term-missing --cov-branch"
+
+[tool.coverage.run]
+source = ["langops"]
+branch = true
+omit = [
+    "tests/*",
+    "demo/*",
+    "docs/*",
+    "*/__pycache__/*",
+    "*/migrations/*",
+    "*/venv/*",
+    "*/.venv/*"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+show_missing = true
+
+[tool.coverage.xml]
+output = "coverage.xml"
