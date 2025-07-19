@@ -52,7 +52,8 @@ jobs:
 
       - name: Patch coverage for Sonar
         run: |
-          sed -i 's|<source>.*</source>|<source>.</source>|' coverage.xml
+          echo "Patching coverage.xml for Sonar"
+          # sed -i 's|<source>.*</source>|<source>.</source>|' coverage.xml
 
       - name: Upload coverage
         uses: actions/upload-artifact@v4
