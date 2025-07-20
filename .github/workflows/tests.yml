@@ -4,10 +4,17 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'tests/**'
+      - 'langops/**'
+      - 'docs/**'
   pull_request:
     branches:
       - main
-
+    paths:
+      - 'tests/**'
+      - 'langops/**'
+      - 'docs/**'
 jobs:
   build:
     name: Lint & Test
