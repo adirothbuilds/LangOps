@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "langops"
-version = "0.2.1"
+version = "0.2.2"
 description = "LangOps is a modular SDK for parsing and analyzing CI/CD logs using AI. It provides a registry-based parser framework, LLM-ready JSON output, and plug-and-play pattern sets for tools like Jenkins, Docker, Sonar, JFrog, and more."
 authors = ["Adi Roth <adi.build.balance@gmail.com>"]
 license = "MIT"
