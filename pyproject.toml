@@ -5,9 +5,8 @@ description = "LangOps is a modular SDK for parsing and analyzing CI/CD logs usi
 authors = ["Adi Roth <adi.build.balance@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/adirothbuilds/langops"
+homepage = "https://langops.adirothbuilds.com/"
 repository = "https://github.com/adirothbuilds/langops"
-documentation = "https://github.com/adirothbuilds/langops/tree/main/docs"
 packages = [
     { include = "langops" }
 ]
