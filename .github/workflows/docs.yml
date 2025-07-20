@@ -3,6 +3,10 @@ name: Deploy Documentation
 on:
   push:
     branches: [ main ]
+    paths:
+    - 'docs/**'
+    - 'mkdocs.yml'
+    - 'requirements.docs.txt'
 
 permissions:
   contents: read
